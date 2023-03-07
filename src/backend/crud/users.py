@@ -1,8 +1,6 @@
 from fastapi import Request
 
-
-from models.users import UserUpdate
-from models.users import UserBase
+from models.users import UserBase, UserUpdate
 
 async def createUser(request:Request, newUser:UserBase):
     user = await request.app.mongodb['users'].insert_one(newUser)
