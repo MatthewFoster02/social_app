@@ -8,3 +8,7 @@ async def createUser(request:Request, newUser:UserBase=Body(...)):
 
 async def getUser(request:Request, userID:int):
     user = request.app.mongodb['users'].find_one({'_id': userID})
+    return UserBase(**user) if user is not None else None
+
+async def updateUser(request:Request, updateUser:UserBase):
+    pass

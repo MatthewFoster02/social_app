@@ -22,6 +22,16 @@ class UserBase(MongoBaseModel):
         except EmailNotValidError:
             raise EmailNotValidError
 
+
+class UserBase(MongoBaseModel):
+    firstname:Optional[str] = None
+    lastname:Optional[str] = None
+    username:Optional[str] = None
+    password:Optional[str] = None
+    profile_pic:Optional[str] = None
+    bio:Optional[str] = None
+    birthday:Optional[int] = None
+
 class LoginBase(BaseModel):
     email:str = EmailStr(...)
     password:str = Field(...)
