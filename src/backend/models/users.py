@@ -23,7 +23,7 @@ class UserBase(MongoBaseModel):
             raise EmailNotValidError
 
 
-class UserBase(MongoBaseModel):
+class UserUpdate(MongoBaseModel):
     firstname:Optional[str] = None
     lastname:Optional[str] = None
     username:Optional[str] = None
