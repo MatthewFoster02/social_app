@@ -1,0 +1,11 @@
+from typing import List, Optional
+from pydantic import Field
+
+from models.base import MongoBaseModel
+
+class PostBase(MongoBaseModel):
+    author:str = Field(...)
+    content:str = Field(..., min_length=1, max_length=280)
+    datePosted:int = Field(...)
+    likes:int = Field(...)
+    comments:Optional[List[str]] = None
