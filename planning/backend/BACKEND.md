@@ -4,7 +4,7 @@
 
 ![UML](https://github.com/MatthewFoster02/social_app/blob/main/planning/backend/diagrams/UML.png)
 
-The above UML diagram is basic overview of the simple structure of the backend for the application.
+The above UML diagram is basic overview of the simple structure of the backend for the application, the actual content and structure of the backend may be slightly different.
 
 The main.py file will contain our [FastAPI](https://fastapi.tiangolo.com/) app and the methods for starting up and shutting down our connection to the MongoDB python client. It will also bind our two routes to the FastAPI app.
 
