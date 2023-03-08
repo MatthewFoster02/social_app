@@ -9,7 +9,7 @@ class UserBase(MongoBaseModel):
     lastname:str = Field(..., max_length=20)
     username:str = Field(..., max_length=16)
     email:str = Field(...)
-    password:str = Field(..., min_length=8, max_length=16)
+    password:str = Field(...)
     profile_pic:Optional[str] = None
     bio:str = Field(..., max_length=200)
     birthday:Optional[int] = None
