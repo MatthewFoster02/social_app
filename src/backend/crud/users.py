@@ -8,8 +8,11 @@ async def createUser(request:Request, newUser:UserBase):
     user = await request.app.mongodb['users'].insert_one(newUser)
     return await request.app.mongodb['users'].find_one({'_id': user.inserted_id})
 
-async def getUser(request:Request, userID:str, idType:str):
+async def getUser(request:Request, userID:str, idType:str, login:bool=False):
     user = await request.app.mongodb['users'].find_one({idType: userID})
+    if login:
+        return user
+    
     return UserBase(**user) if user is not None else None
 
 async def updateUser(request:Request, userID:str, updateUser:UserUpdate):

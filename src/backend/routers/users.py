@@ -25,9 +25,9 @@ async def register(request:Request, newUser:UserBase=Body(...)):
 
 @router.post('/login', response_description='Login user')
 async def login(request:Request, loginUser:LoginBase=Body(...)):
-    user = await users.getUser(request, loginUser.email, 'email')
+    user = await users.getUser(request, loginUser.email, 'email', True)
 
-    if user is not None:
+    if user is None:
         raise HTTPException(status_code=401, detail='No account with entered email')
     
     if not authorization.verifyPassword(loginUser.password, user['password']):
