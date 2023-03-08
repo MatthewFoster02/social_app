@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 from decouple import config
 
 from crud import users
-from models.users import LoginBase, UserBase
+from models.users import LoginBase, UserBase, UserUpdate
 from authentication import Authorization
 
 DEFAULT_PROFILE_PIC_URL = config('DEFAULT_PROFILE_PICTURE', cast=str)
@@ -46,7 +46,7 @@ async def user_by_id(request:Request, id:str):
     raise HTTPException(status_code=404, detail=f'User with id: {id} not found')
 
 @router.patch('/{id}', response_description='Update user with ID')
-async def update_user(request:Request, id:str, user:dict=Body(...), userID=Depends(authorization.authWrapper)):
+async def update_user(request:Request, id:str, user:UserUpdate=Body(...), userID=Depends(authorization.authWrapper)):
     if id == userID:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Only user can update their profile')
     

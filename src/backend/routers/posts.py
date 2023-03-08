@@ -1,23 +1,17 @@
 from typing import Optional
-from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
+from fastapi import APIRouter, Depends, HTTPException, Request, Response, status, Body
 from fastapi.responses import JSONResponse
 from datetime import datetime
 
 from crud import posts
+from models.posts import PostBase
 from authentication import Authorization
 
 router = APIRouter()
 authorization = Authorization()
 
 @router.post('/create', response_description='Create new post')
-async def create(request:Request, content:str, userID=Depends(authorization.authWrapper)):
-    post = {
-        'author': userID,
-        'content': content,
-        'date_posted': datetime.utcnow(),
-        'likes': 0
-    }
-
+async def create(request:Request, post:PostBase=Body(...), userID=Depends(authorization.authWrapper)):
     created_post = await posts.createPost(request, post)
     return JSONResponse(status_code=status.HTTP_201_CREATED, content=created_post)
 
