@@ -1,7 +1,6 @@
 from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Request, Response, status, Body
 from fastapi.responses import JSONResponse
-from datetime import datetime
 
 from crud import posts
 from models.posts import PostBase
@@ -10,12 +9,14 @@ from authentication import Authorization
 router = APIRouter()
 authorization = Authorization()
 
-@router.post('/create', response_description='Create new post')
+@router.post('/', response_description='Create new post')
 async def create(request:Request, post:PostBase=Body(...), userID=Depends(authorization.authWrapper)):
+    if not post.author == userID:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='User attempting to author someone elses post')
     created_post = await posts.createPost(request, post)
     return JSONResponse(status_code=status.HTTP_201_CREATED, content=created_post)
 
-@router.get('/all', response_description='Get all posts matching query')
+@router.get('/', response_description='Get all posts matching query')
 async def get_all(request:Request, userID:Optional[str]=None, page:int=1):
     return await posts.getAllPosts(request, userID, page)
 

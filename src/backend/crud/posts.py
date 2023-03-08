@@ -20,7 +20,7 @@ async def getAllPosts(request:Request, userID:Optional[int], page:int=1):
     if userID:
         query['author'] = userID
     
-    results = await request.app.mongodb['posts'].find(query).skip(skip).limit(RESULTS_PER_PAGE)
+    results = request.app.mongodb['posts'].find(query).sort('_id', 1).skip(skip).limit(RESULTS_PER_PAGE)
     return {'posts': [PostBase(**raw_post) async for raw_post in results], 'total_pages': totalPages(request, query)}
 
 async def getPostByID(request:Request, postID:str):

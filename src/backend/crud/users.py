@@ -16,7 +16,6 @@ async def getUser(request:Request, userID:str, idType:str, login:bool=False):
     return UserBase(**user) if user is not None else None
 
 async def updateUser(request:Request, userID:str, updateUser:UserUpdate):
-    updateUser = jsonable_encoder(updateUser)
     await request.app.mongodb['users'].update_one(
         {'_id': userID}, {'$set': updateUser.dict(exclude_unset=True)}
     )

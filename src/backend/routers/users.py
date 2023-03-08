@@ -47,7 +47,8 @@ async def user_by_id(request:Request, id:str):
 
 @router.patch('/{id}', response_description='Update user with ID')
 async def update_user(request:Request, id:str, user:UserUpdate=Body(...), userID=Depends(authorization.authWrapper)):
-    if id == userID:
+    print(id, userID)
+    if not id == userID:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Only user can update their profile')
     
     updated_user = await users.updateUser(request, userID, user)
