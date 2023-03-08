@@ -37,7 +37,7 @@ async def post_by_id(request:Request, id:str):
     raise HTTPException(status_code=404, detail=f'Post with id: {id} not found')
 
 @router.delete('/{id}', response_description='Delete post with ID')
-async def delete(request:Request, id:str, userID:Depends(authorization.authWrapper)):
+async def delete_post(request:Request, id:str, userID=Depends(authorization.authWrapper)):
     post_to_delete = await posts.getPostByID(request, id)
 
     if post_to_delete is None:

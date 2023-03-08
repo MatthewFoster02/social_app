@@ -8,8 +8,8 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from routers.users import router as users_router
 from routers.posts import router as posts_router
 
-DB_URL = config('DN_URL', cast=str)
-DB_NAME = config('DN_NAME', cast=str)
+DB_URL = config('DB_URL', cast=str)
+DB_NAME = config('DB_NAME', cast=str)
 
 middleware = [
     Middleware(
