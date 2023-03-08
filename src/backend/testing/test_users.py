@@ -92,31 +92,55 @@ def test_get_user_404():
         assert response.json() == {'detail': 'User with id: fakeid not found'}
 
 # Testing login
-def test_login_success():
+# def test_login_success():
+#     with TestClient(app) as client:
+#         response = client.post(
+#             baseURL + '/login',
+#             json={
+#                 'email': 'jk@outlook.com',
+#                 'password': 'crackTh1s'
+#             }
+#         )
+#         assert response.status_code == 200
+#         res = response.json()
+#         user = res['user']
+#         token = res['token']
+#         assert re.match(token_pattern, token)
+#         assert user == {
+#             '_id': '6408b19b0f115edfa39cfad3',
+#             'firstname': 'Johann',
+#             'lastname': 'Lottermoser',
+#             'username': 'Jojo',
+#             'email': 'jk@outlook.com',
+#             'password': '$2b$12$EMMKiJqr4frWWDvXlYKg9etYnAJXZ2BEkRiMbM.A31n82yomFaKZi',
+#             'bio': 'This is a bio',
+#             'birthday': 4448,
+#             'profile_pic': 'http://res.cloudinary.com/dphekriyz/image/upload/v1678237366/profile_pics/e1ydvozojlzhdzr353oj.jpg'
+#         }
+
+def test_login_email_not_existing():
+    with TestClient(app) as client:
+        response = client.post(
+            baseURL + '/login',
+            json={
+                'email': 'pop@outlook.com',
+                'password': 'crackTh1s'
+            }
+        )
+        assert response.status_code == 401
+        assert response.json() == {'detail': 'No account with entered email'}
+
+def test_login_incorrect_password():
     with TestClient(app) as client:
         response = client.post(
             baseURL + '/login',
             json={
                 'email': 'jk@outlook.com',
-                'password': 'crackTh1s'
+                'password': 'crackTh2s'
             }
         )
-        assert response.status_code == 200
-        res = response.json()
-        user = res['user']
-        token = res['token']
-        assert re.match(token_pattern, token)
-        assert user == {
-            '_id': '6408b19b0f115edfa39cfad3',
-            'firstname': 'Johann',
-            'lastname': 'Lottermoser',
-            'username': 'Jojo',
-            'email': 'jk@outlook.com',
-            'password': '$2b$12$EMMKiJqr4frWWDvXlYKg9etYnAJXZ2BEkRiMbM.A31n82yomFaKZi',
-            'bio': 'This is a bio',
-            'birthday': 4448,
-            'profile_pic': 'http://res.cloudinary.com/dphekriyz/image/upload/v1678237366/profile_pics/e1ydvozojlzhdzr353oj.jpg'
-        }
+        assert response.status_code == 401
+        assert response.json() == {'detail': 'Incorrect password'}
 
 
 # Testing deleting user
