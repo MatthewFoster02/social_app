@@ -2,7 +2,7 @@ from fastapi import APIRouter, Body, Depends, HTTPException, Request, Response, 
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 
-from crud import users, posts
+from crud import users
 from models.users import LoginBase
 from authentication import Authorization
 
