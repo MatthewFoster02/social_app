@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Body, Depends, HTTPException, Request, Response, status
-from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from decouple import config
+from bson import ObjectId
 
 from crud import users
 from models.users import LoginBase
@@ -20,12 +20,10 @@ async def register(request:Request, newUser:dict=Body(...)):
 
     if await users.getUser(request, newUser['email'], 'email') is not None:
         raise HTTPException(status_code=409, detail=f"User with email {newUser['email']} already exists")
-    if await users.getUser(request, newUser['password'], 'password'):
-        raise HTTPException(status_code=409, detail=f"User with username {newUser['username']} already exists")
 
     user = await users.createUser(request, newUser)
-    print(user)
-    return JSONResponse(status_code=status.HTTP_201_CREATED, content=jsonable_encoder(user))
+    user['_id'] = str(user['_id'])
+    return JSONResponse(status_code=status.HTTP_201_CREATED, content=user)
 
 @router.post('/login', response_description='Login user')
 async def login(request:Request, loginUser:LoginBase=Body(...)):
