@@ -1,6 +1,5 @@
 from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
-from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from datetime import datetime
 
@@ -19,7 +18,6 @@ async def create(request:Request, content:str, userID=Depends(authorization.auth
         'likes': 0
     }
 
-    post = jsonable_encoder(post)
     created_post = await posts.createPost(request, post)
     return JSONResponse(status_code=status.HTTP_201_CREATED, content=created_post)
 
