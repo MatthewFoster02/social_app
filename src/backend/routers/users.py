@@ -11,12 +11,13 @@ authorization = Authorization()
 
 @router.post('/register', response_description='Register new user')
 async def register(request:Request, newUser:dict=Body(...)):
-    newUser.password = authorization.hashPassword(newUser.password)
+    print(newUser)
+    newUser['password'] = authorization.hashPassword(newUser['password'])
     newUser = jsonable_encoder(newUser)
 
-    if await users.getUser(request, newUser.email, 'email') is not None:
+    if await users.getUser(request, newUser['email'], 'email') is not None:
         raise HTTPException(status_code=409, detail=f"User with email {newUser['email']} already exists")
-    if await users.getUser(request, newUser.password, 'password'):
+    if await users.getUser(request, newUser['password'], 'password'):
         raise HTTPException(status_code=409, detail=f"User with username {newUser['username']} already exists")
 
     user = await users.createUser(request, newUser)
