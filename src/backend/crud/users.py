@@ -1,16 +1,19 @@
 from fastapi import Request
+from fastapi.encoders import jsonable_encoder
 
 from models.users import UserBase, UserUpdate
 
 async def createUser(request:Request, newUser:UserBase):
+    newUser = jsonable_encoder(newUser)
+    print(newUser)
     user = await request.app.mongodb['users'].insert_one(newUser)
     return await request.app.mongodb['users'].find_one({'_id': user.inserted_id})
 
-async def getUser(request:Request, userID:int, idType:str):
+async def getUser(request:Request, userID:str, idType:str):
     user = await request.app.mongodb['users'].find_one({idType: userID})
     return UserBase(**user) if user is not None else None
 
-async def updateUser(request:Request, userID:int, updateUser:UserUpdate):
+async def updateUser(request:Request, userID:str, updateUser:UserUpdate):
     await request.app.mongodb['users'].update_one(
         {'_id': userID}, {'$set': updateUser.dict(exclude_unset=True)}
     )
@@ -18,6 +21,6 @@ async def updateUser(request:Request, userID:int, updateUser:UserUpdate):
     user = await request.app.mongodb['users'].find_one({'_id': userID})
     return UserBase(**user) if user is not None else None
 
-async def deleteUser(request:Request, userID:int):
+async def deleteUser(request:Request, userID:str):
     deleted = await request.app.mongodb['users'].delete_one({'_id': userID})
     return deleted.deleted_count == 1

@@ -1,10 +1,9 @@
 from fastapi import APIRouter, Body, Depends, HTTPException, Request, Response, status
 from fastapi.responses import JSONResponse
 from decouple import config
-from bson import ObjectId
 
 from crud import users
-from models.users import LoginBase
+from models.users import LoginBase, UserBase
 from authentication import Authorization
 
 DEFAULT_PROFILE_PIC_URL = config('DEFAULT_PROFILE_PICTURE', cast=str)
@@ -13,16 +12,15 @@ router = APIRouter()
 authorization = Authorization()
 
 @router.post('/register', response_description='Register new user')
-async def register(request:Request, newUser:dict=Body(...)):
-    if 'profile_pic' not in newUser:
-        newUser['profile_pic'] = DEFAULT_PROFILE_PIC_URL
-    newUser['password'] = authorization.hashPassword(newUser['password'])
+async def register(request:Request, newUser:UserBase=Body(...)):
+    if newUser.profile_pic is None:
+        newUser.profile_pic = DEFAULT_PROFILE_PIC_URL
+    newUser.password = authorization.hashPassword(newUser.password)
 
-    if await users.getUser(request, newUser['email'], 'email') is not None:
-        raise HTTPException(status_code=409, detail=f"User with email {newUser['email']} already exists")
+    if await users.getUser(request, newUser.email, 'email') is not None:
+        raise HTTPException(status_code=409, detail=f"User with email {newUser.email} already exists")
 
     user = await users.createUser(request, newUser)
-    user['_id'] = str(user['_id'])
     return JSONResponse(status_code=status.HTTP_201_CREATED, content=user)
 
 @router.post('/login', response_description='Login user')
