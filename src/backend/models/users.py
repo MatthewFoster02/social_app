@@ -11,7 +11,7 @@ class UserBase(MongoBaseModel):
     email:str = Field(...)
     password:str = Field(...)
     profile_pic:Optional[str] = None
-    bio:str = Field(..., max_length=200)
+    bio:Optional[str] = None
     birthday:Optional[int] = None
 
     @validator('email')
