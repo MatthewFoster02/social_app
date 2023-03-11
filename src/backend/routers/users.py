@@ -6,6 +6,7 @@ from crud import users
 from models.users import LoginBase, UserBase, UserUpdate
 from authentication import Authorization
 
+# Get the default profile pic from environment variable, used when no profile pic is specified upon registering
 DEFAULT_PROFILE_PIC_URL = config('DEFAULT_PROFILE_PICTURE', cast=str)
 
 router = APIRouter()
@@ -13,6 +14,7 @@ authorization = Authorization()
 
 @router.post('/register', response_description='Register new user')
 async def register(request:Request, newUser:UserBase=Body(...)):
+    # Add in default profile pic, if pic not specified
     if newUser.profile_pic is None:
         newUser.profile_pic = DEFAULT_PROFILE_PIC_URL
     newUser.password = authorization.hashPassword(newUser.password)
@@ -27,12 +29,15 @@ async def register(request:Request, newUser:UserBase=Body(...)):
 async def login(request:Request, loginUser:LoginBase=Body(...)):
     user = await users.getUser(request, loginUser.email, 'email', True)
 
+    # Check user exists
     if user is None:
         raise HTTPException(status_code=401, detail='No account with entered email')
     
+    # Check password correct
     if not authorization.verifyPassword(loginUser.password, user['password']):
         raise HTTPException(status_code=401, detail='Incorrect password')
     
+    # Generate token, return along with user that has been logged in
     token = authorization.encodeToken(user['_id'])
     return JSONResponse(content={'user': user, 'token': token})
 
@@ -47,7 +52,7 @@ async def user_by_id(request:Request, id:str):
 
 @router.patch('/{id}', response_description='Update user with ID')
 async def update_user(request:Request, id:str, user:UserUpdate=Body(...), userID=Depends(authorization.authWrapper)):
-    print(id, userID)
+    # Check if the user to be updated is the user that is authenticated
     if not id == userID:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Only user can update their profile')
     
@@ -60,6 +65,7 @@ async def update_user(request:Request, id:str, user:UserUpdate=Body(...), userID
 
 @router.delete('/{id}', response_description='Delete user with ID')
 async def delete_user(request:Request, id:str, userID=Depends(authorization.authWrapper)):
+    # Check if the user to be deleted is the user that is authenticated
     if not id == userID:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Only user can delete their profile')
     

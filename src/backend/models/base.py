@@ -1,6 +1,7 @@
 from bson import ObjectId
 from pydantic import BaseModel, Field
 
+# Converts the ObjectId identifier to str
 class PyObjectID(ObjectId):
     @classmethod
     def __get_validators__(cls):

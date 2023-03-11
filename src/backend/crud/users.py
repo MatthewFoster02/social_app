@@ -4,10 +4,11 @@ from fastapi.encoders import jsonable_encoder
 from models.users import UserBase, UserUpdate
 
 async def createUser(request:Request, newUser:UserBase):
-    newUser = jsonable_encoder(newUser)
+    newUser = jsonable_encoder(newUser) # Encode as JSON
     user = await request.app.mongodb['users'].insert_one(newUser)
     return await request.app.mongodb['users'].find_one({'_id': user.inserted_id})
 
+# Versatile method, allows for retrieval of user using any field
 async def getUser(request:Request, userID:str, idType:str, login:bool=False):
     user = await request.app.mongodb['users'].find_one({idType: userID})
     if login:

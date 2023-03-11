@@ -8,7 +8,7 @@ from decouple import config
 class Authorization():
     security = HTTPBearer()
     password_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
-    SECRET = config('SECRET_KEY', cast=str)
+    SECRET = config('SECRET_KEY', cast=str) # Take secret key from environment variables.
 
     def hashPassword(self, password):
         return self.password_context.hash(password)
@@ -18,7 +18,7 @@ class Authorization():
     
     def encodeToken(self, userID):
         payload = {
-            'exp': datetime.utcnow() + timedelta(days=1),
+            'exp': datetime.utcnow() + timedelta(days=1), # Token valid for 24 hours (1 day)
             'iat': datetime.utcnow(),
             'sub': userID
         }

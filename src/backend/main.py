@@ -8,6 +8,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from routers.users import router as users_router
 from routers.posts import router as posts_router
 
+# Environment variables / Database info
 DB_URL = config('DB_URL', cast=str)
 DB_NAME = config('DB_NAME', cast=str)
 
@@ -23,9 +24,11 @@ middleware = [
 
 app = FastAPI(middleware=middleware)
 
+# Include the two routes
 app.include_router(users_router, prefix='/users', tags=['users'])
 app.include_router(posts_router, prefix='/posts', tags=['posts'])
 
+# Startup and Shutdown events, open/close connection with MongoDB database
 @app.on_event('startup')
 async def startup_db_client():
     app.mongodb_client = AsyncIOMotorClient(DB_URL)

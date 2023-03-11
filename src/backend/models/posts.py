@@ -3,6 +3,7 @@ from pydantic import Field
 
 from models.base import MongoBaseModel
 
+# Defines the structure of a post object
 class PostBase(MongoBaseModel):
     author:str = Field(...)
     content:str = Field(..., min_length=1, max_length=280)
@@ -10,5 +11,6 @@ class PostBase(MongoBaseModel):
     likes:int = Field(...)
     comments:Optional[List[str]] = None
 
+# Allows for posts to be updated when comments are added
 class PostComment(MongoBaseModel):
     comments:Optional[List[str]] = None

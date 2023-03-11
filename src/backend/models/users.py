@@ -4,6 +4,7 @@ from pydantic import BaseModel, EmailStr, Field, validator
 
 from models.base import MongoBaseModel
 
+# Defines the structure of the user object 
 class UserBase(MongoBaseModel):
     firstname:str = Field(..., max_length=20)
     lastname:str = Field(..., max_length=20)
@@ -14,6 +15,7 @@ class UserBase(MongoBaseModel):
     bio:Optional[str] = None
     birthday:Optional[int] = None
 
+    # Validate email entered
     @validator('email')
     def valid_email(cls, v):
         try:
@@ -22,7 +24,7 @@ class UserBase(MongoBaseModel):
         except EmailNotValidError:
             raise EmailNotValidError
 
-
+# Allows for user information to be updated in the database
 class UserUpdate(MongoBaseModel):
     firstname:Optional[str] = None
     lastname:Optional[str] = None
@@ -32,6 +34,7 @@ class UserUpdate(MongoBaseModel):
     bio:Optional[str] = None
     birthday:Optional[int] = None
 
+# Defines login structure, only email and password needed for logging in
 class LoginBase(BaseModel):
     email:str = EmailStr(...)
     password:str = Field(...)

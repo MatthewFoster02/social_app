@@ -11,6 +11,7 @@ authorization = Authorization()
 
 @router.post('/', response_description='Create new post')
 async def create(request:Request, post:PostBase=Body(...), userID=Depends(authorization.authWrapper)):
+    # Check that author of post is the current authenticated user
     if not post.author == userID:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='User attempting to author someone elses post')
     created_post = await posts.createPost(request, post)
@@ -18,6 +19,7 @@ async def create(request:Request, post:PostBase=Body(...), userID=Depends(author
 
 @router.get('/', response_description='Get all posts matching query')
 async def get_all(request:Request, userID:Optional[str]=None, page:int=1):
+    # Check that the query ID exists if one was included in request
     if userID is not None:
         user = await users.getUser(request, userID, '_id', False)
         if user is None:
