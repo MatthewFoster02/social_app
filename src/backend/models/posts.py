@@ -10,7 +10,3 @@ class PostBase(MongoBaseModel):
     date_posted:int = Field(...)
     likes:int = Field(...)
     comments:Optional[List[str]] = None
-
-# Allows for posts to be updated when comments are added
-class PostComment(MongoBaseModel):
-    comments:Optional[List[str]] = None

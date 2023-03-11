@@ -45,3 +45,16 @@ async def increaseLikes(request:Request, id:str):
     )
     updated_post = await request.app.mongodb['posts'].find_one({'_id': id})
     return PostBase(**updated_post) if updated_post is not None else None
+
+async def createComment(request:Request, newPost:PostBase, id:str):
+    newComment = await createPost(request, newPost)
+
+    parentPost = await request.app.mongodb['posts'].find_one({'_id': id})
+    updated_comments = []
+    if parentPost['comments'] is not None:
+        updated_comments = parentPost['comments']
+    updated_comments.append(newComment['_id'])
+    await request.app.mongodb['posts'].update_one(
+        {'_id': parentPost['_id']}, {'$set': {'comments': updated_comments}}
+    )
+    return newComment

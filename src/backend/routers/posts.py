@@ -60,3 +60,10 @@ async def increase_like_count(request:Request, id:str):
         return post
     
     raise HTTPException(status_code=404, detail=f'Post with id: {id} not found')
+
+@router.post('/comment/{id}', response_description='Create comment on post with ID')
+async def create_comment(request:Request, id:str, comment:PostBase=Body(...), userID=Depends(authorization.authWrapper)):
+    if not comment.author == userID:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='User attempting to author someone elses comment')
+    created_post = await posts.createComment(request, comment, id)
+    return JSONResponse(status_code=status.HTTP_201_CREATED, content=created_post)
