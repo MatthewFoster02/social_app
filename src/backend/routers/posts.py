@@ -51,3 +51,12 @@ async def delete_post(request:Request, id:str, userID=Depends(authorization.auth
         return Response(status_code=status.HTTP_204_NO_CONTENT)
     
     raise HTTPException(status_code=404, detail=f'Post with id: {id} not found')
+
+@router.patch('/like/{id}', response_description='Increase like count on post matching ID')
+async def increase_like_count(request:Request, id:str):
+    post = await posts.increaseLikes(request, id)
+
+    if post is not None:
+        return post
+    
+    raise HTTPException(status_code=404, detail=f'Post with id: {id} not found')

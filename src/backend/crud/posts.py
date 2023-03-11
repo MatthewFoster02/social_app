@@ -37,3 +37,11 @@ async def getPostByID(request:Request, postID:str):
 async def deletePost(request:Request, postID:str):
     deleted = await request.app.mongodb['posts'].delete_one({'_id': postID})
     return deleted.deleted_count == 1
+
+async def increaseLikes(request:Request, id:str):
+    await request.app.mongodb['posts'].update_one(
+        {'_id': id},
+        {'$inc': {'likes': 1}}
+    )
+    updated_post = await request.app.mongodb['posts'].find_one({'_id': id})
+    return PostBase(**updated_post) if updated_post is not None else None
