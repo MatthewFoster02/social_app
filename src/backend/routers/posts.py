@@ -67,3 +67,15 @@ async def create_comment(request:Request, id:str, comment:PostBase=Body(...), us
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='User attempting to author someone elses comment')
     created_post = await posts.createComment(request, comment, id)
     return JSONResponse(status_code=status.HTTP_201_CREATED, content=created_post)
+
+@router.get('/comment/{id}', response_description='Get all comments on post with ID')
+async def get_all_comments(request:Request, id:str):
+    comments = await posts.getCommentsByID(request, id)
+
+    if comments == 'No comments':
+        return JSONResponse(status_code=status.HTTP_200_OK, content={'message': 'No comments'})
+    
+    if not comments == 'No post':
+        return comments
+    
+    raise HTTPException(status_code=404, detail=f'Post with id: {id} not found')

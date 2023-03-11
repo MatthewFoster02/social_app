@@ -58,3 +58,18 @@ async def createComment(request:Request, newPost:PostBase, id:str):
         {'_id': parentPost['_id']}, {'$set': {'comments': updated_comments}}
     )
     return newComment
+
+async def getCommentsByID(request:Request, id:str):
+    post = await request.app.mongodb['posts'].find_one({'_id': id})
+
+    if post is None:
+        return 'No post'
+
+    if post['comments'] is None:
+        return 'No comments'
+    comments = []
+    for commentID in post['comments']:
+        comment = await getPostByID(request, commentID)
+        print(f"Comment {comment}")
+        comments.append(comment)
+    return comments
