@@ -60,8 +60,8 @@ async def update_user(request:Request, id:str, user:UserUpdate=Body(...), userID
 
 @router.delete('/{id}', response_description='Delete user with ID')
 async def delete_user(request:Request, id:str, userID=Depends(authorization.authWrapper)):
-    if id == userID:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Only user can update their profile')
+    if not id == userID:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Only user can delete their profile')
     
     delete_success = await users.deleteUser(request, userID)
 

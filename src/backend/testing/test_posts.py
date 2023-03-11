@@ -24,13 +24,13 @@ def test_get_all_no_query():
 def test_get_all_specific_author():
     with TestClient(app) as client:
         response = client.get(
-            baseURL + f"?userID=640bdda103de9a1aac3df9cf"
+            baseURL + f"?userID=640bedd4f9aaa06b8a255831"
         )
         assert response.status_code == 200
         posts = response.json()['posts']
         assert posts[0] == {
-            "_id": "640be67a9ad12d55bbb6804b",
-			"author": "640bdda103de9a1aac3df9cf",
+            "_id": "640bee2070f109d62fc5dce1",
+			"author": "640bedd4f9aaa06b8a255831",
 			"content": "This is a test post",
 			"date_posted": 7000,
 			"likes": 2000000,
