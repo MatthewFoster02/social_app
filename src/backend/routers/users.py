@@ -50,6 +50,14 @@ async def user_by_id(request:Request, id:str):
     
     raise HTTPException(status_code=404, detail=f'User with id: {id} not found')
 
+@router.get('/', response_description='Get users matching search query')
+async def get_user_by_query(request:Request, query:str):
+    userss = await users.getUserByQuery(request, query)
+    if userss is not None:
+        return userss
+    
+    raise HTTPException(status_code=404, detail=f'No users found matching {query}')
+
 @router.patch('/{id}', response_description='Update user with ID')
 async def update_user(request:Request, id:str, user:UserUpdate=Body(...), userID=Depends(authorization.authWrapper)):
     # Check if the user to be updated is the user that is authenticated

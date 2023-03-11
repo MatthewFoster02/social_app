@@ -16,6 +16,22 @@ async def getUser(request:Request, userID:str, idType:str, login:bool=False):
     
     return UserBase(**user) if user is not None else None
 
+async def getUserByQuery(request:Request, query:str):
+    query_item = {'$regex': query, '$options': 'i'}
+    query_dict = {
+        '$or': [
+            {'firstname': query_item},
+            {'lastname': query_item},
+            {'username': query_item},
+            {'email': query_item},
+        ]
+    }
+    #print(query_dict)
+    users = request.app.mongodb['users'].find(query_dict)
+    if users is None:
+        return None
+    return [UserBase(**user) async for user in users]
+
 async def updateUser(request:Request, userID:str, updateUser:UserUpdate):
     await request.app.mongodb['users'].update_one(
         {'_id': userID}, {'$set': updateUser.dict(exclude_unset=True)}
