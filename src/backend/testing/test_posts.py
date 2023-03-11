@@ -37,6 +37,14 @@ def test_get_all_specific_author():
 			"comments": None
         }
 
+def test_get_all_specific_author_error_404():
+    with TestClient(app) as client:
+        response = client.get(
+            baseURL + f"?userID=fakeID"
+        )
+        assert response.status_code == 404
+        assert response.json() == {'detail': 'User with id: fakeID not found'}        
+
 # Testing get by ID route
 def test_get_by_id_success():
     with TestClient(app) as client:

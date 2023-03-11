@@ -2,7 +2,7 @@ from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Request, Response, status, Body
 from fastapi.responses import JSONResponse
 
-from crud import posts
+from crud import posts, users
 from models.posts import PostBase
 from authentication import Authorization
 
@@ -18,6 +18,10 @@ async def create(request:Request, post:PostBase=Body(...), userID=Depends(author
 
 @router.get('/', response_description='Get all posts matching query')
 async def get_all(request:Request, userID:Optional[str]=None, page:int=1):
+    if userID is not None:
+        user = await users.getUser(request, userID, '_id', False)
+        if user is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'User with id: {userID} not found')
     return await posts.getAllPosts(request, userID, page)
 
 @router.get('/{id}', response_description='Get post with ID')
