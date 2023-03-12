@@ -73,3 +73,21 @@ async def getCommentsByID(request:Request, id:str):
         print(f"Comment {comment}")
         comments.append(comment)
     return comments
+
+async def removeComment(request:Request, id:str):
+    parentPost = await request.app.mongodb['posts'].find_one({'comments': id})
+
+    if parentPost is None:
+        return 'No post'
+
+    if parentPost['comments'] is None:
+        return 'No comments'
+    
+    old_comments = parentPost['comments']
+    print(f"Old Comments {old_comments}")
+    print(f"ID {id}")
+    old_comments.remove(id)
+    print(f"New Comments {old_comments}")
+    await request.app.mongodb['posts'].update_one(
+        {'_id': parentPost['_id']}, {'$set': {'comments': old_comments}}
+    )
