@@ -26,10 +26,7 @@ async def getUserByQuery(request:Request, query:str):
             {'email': query_item},
         ]
     }
-    #print(query_dict)
     users = request.app.mongodb['users'].find(query_dict)
-    if users is None:
-        return None
     return [UserBase(**user) async for user in users]
 
 async def updateUser(request:Request, userID:str, updateUser:UserUpdate):

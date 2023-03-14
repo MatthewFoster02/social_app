@@ -53,7 +53,7 @@ async def user_by_id(request:Request, id:str):
 @router.get('/', response_description='Get users matching search query')
 async def get_user_by_query(request:Request, query:str):
     userss = await users.getUserByQuery(request, query)
-    if userss is not None:
+    if not userss == []:
         return userss
     
     raise HTTPException(status_code=404, detail=f'No users found matching {query}')

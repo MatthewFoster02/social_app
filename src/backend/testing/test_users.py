@@ -95,3 +95,28 @@ def test_login_success():
             "bio": "It is me Mario",
             "birthday": 30062002
         }
+
+# Testing get user by query
+def test_query_404():
+    with TestClient(app) as client:
+        response = client.get(f'{baseURL}?query=fakeUser')
+        assert response.status_code == 404
+        assert response.json() == {'detail': 'No users found matching fakeUser'}
+
+def test_query_success():
+    with TestClient(app) as client:
+        response = client.get(f'{baseURL}?query=maat')
+        assert response.status_code == 200
+        res_data = response.json()
+        assert len(res_data) == 2
+        assert res_data[0] == {
+            '_id': '6408c06a8fde09a588c963ce',
+            'firstname': 'Matthew',
+            'lastname': 'Foster',
+            'username': 'Maatty',
+            'email': 'mattfoster02@outlook.com',
+            'password': '$2b$12$X.LIahiJMJ9X0rl8nQpu6etUyrqMO0zLDYbG.UlKbMTMwrJAfyyK6',
+            'bio': 'It is me Mario',
+            'birthday': 30062002,
+            'profile_pic': 'http://res.cloudinary.com/dphekriyz/image/upload/v1678237366/profile_pics/e1ydvozojlzhdzr353oj.jpg'
+        }
