@@ -34,4 +34,4 @@ class UsersAPIConnection
         return axios.delete(baseURL + `/${id}`, {headers: {Authorization: `Bearer ${token}`}});
     }
 }
-export default new UsersAPIConnection
+export default new UsersAPIConnection;
