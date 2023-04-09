@@ -34,7 +34,7 @@ const LeftSidebar = () =>
                             Logout
                         </button>
                     </div>
-                )                
+                )
             }
         </div>
     );

@@ -83,3 +83,10 @@ async def delete_user(request:Request, id:str, userID=Depends(authorization.auth
         return Response(status_code=status.HTTP_204_NO_CONTENT)
     
     raise HTTPException(status_code=404, detail=f'User with id: {id} not found')
+
+@router.get('/me', response_description='Logged in user\'s data')
+async def me(request:Request, userID=Depends(authorization.authWrapper)) -> JSONResponse:
+    currentUser = await request.app.mongodb['users'].find_one({'_id': userID})
+    result = LoginBase(**currentUser).dict()
+    result['id'] = userID
+    return JSONResponse(status_code=status.HTTP_200_OK, content=result)
