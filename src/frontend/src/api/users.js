@@ -31,12 +31,7 @@ class UsersAPIConnection
 
     delete(id, token)
     {
-        return axios.delete(baseURL + `/${id}`, {}, {headers: {Authorization: `Bearer ${token}`}});
-    }
-
-    me(token)
-    {
-        return axios.get(baseURL + '/me', {}, {headers: {Authorization: `Bearer ${token}`}});
+        return axios.delete(baseURL + `/${id}`, {headers: {Authorization: `Bearer ${token}`}});
     }
 }
 export default new UsersAPIConnection
