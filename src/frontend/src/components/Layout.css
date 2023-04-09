@@ -1,0 +1,6 @@
+.layout {
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 2fr 3fr 2fr;
+}

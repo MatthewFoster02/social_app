@@ -1,0 +1,62 @@
+.wrapper {
+    background-color: black;
+    border-right: 1px solid #707070;
+    padding: 8rem 3rem;
+
+    display: grid;
+    align-items: end;
+}
+
+.links {
+    display: grid;
+    gap: 5rem;
+    padding-inline: 1rem;
+}
+
+.link-txt {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.link-txt:hover {
+    color: lightblue;
+}
+
+.logged-out {
+    display: flex;
+    justify-content: space-between;
+}
+
+.link-log {
+    text-decoration: none;
+    background-color: white;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0.5rem 2rem;
+    border-radius: 100vw;
+}
+
+.link-log:hover {
+    background-color: lightblue;
+}
+
+.logged-in {
+    display: grid;
+}
+
+.btn-log {
+    border: none;
+    background-color: white;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-block: 0.5rem;
+    border-radius: 100vw;
+}
+
+.btn-log:hover {
+    background-color: lightblue;
+}

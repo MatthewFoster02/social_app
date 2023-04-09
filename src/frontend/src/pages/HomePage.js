@@ -1,7 +1,9 @@
+import "./HomePage.css";
+
 const HomePage = () => 
 {
     return (
-        <div>HOME PAGE</div>
+        <div className="wrapperHP">HOME PAGE</div>
     );
 }
 export default HomePage;
