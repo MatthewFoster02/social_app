@@ -19,7 +19,6 @@ const Login = () =>
     const onFormSubmit = async (data) =>
     {
         const res = await usersAPI.login(data);
-        console.log(res);
         if(res['statusText'] == 'OK')
         {
             const userDetails = await res['data'];
@@ -34,7 +33,6 @@ const Login = () =>
         }
         else
         {
-            console.log('here');
             let errors = await res['data'];
             console.log(errors);
             setApiError(errors['detail']);
