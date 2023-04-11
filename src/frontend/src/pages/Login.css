@@ -1,0 +1,71 @@
+.wrapperLogin {
+    background-color: black;
+    color: white;
+    border-right: 1px solid #707070;
+    height: 100vh;
+
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.titleLogin {
+    font-weight: bolder;
+    font-size: 2.5rem;
+}
+
+.inputs {
+    display: grid;
+    gap: 2.5rem;
+}
+
+.input {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.err {
+    font-weight: bolder;
+    font-size: 0.75rem;
+    color: lightcoral;
+}
+
+.input-style {
+    background-color: black;
+    color: white;
+    border: 3px solid #707070;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.inputs > ::placeholder {
+    color: #707070;
+}
+
+.submit-btn {
+    border: none;
+    background-color: white;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-block: 0.5rem;
+    border-radius: 100vw;
+}
+
+.submit-btn:hover {
+    cursor: pointer;
+    background-color: lightblue;
+}
+
+.error-alert {
+    margin-top: 2rem;
+    padding: 1rem 1.5rem;
+    background-color: lightcoral;
+    border: 3px solid maroon;
+    border-radius: 0.5rem;
+    color: maroon;
+    font-weight: bold;
+    font-size: 1rem;
+}
