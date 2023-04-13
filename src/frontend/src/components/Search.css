@@ -1,0 +1,41 @@
+.wrapperSearch {
+    display: grid;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #707070;
+}
+
+.searchbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.searchbar > input {
+    background-color: black;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.search {
+    background-color: black;
+    border: none;
+    height: 2.5rem;
+    aspect-ratio: 1;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.search:hover {
+    cursor: pointer;
+    background-color: #242427;
+}
+
+.mag-glass {
+    height: 1.5rem;
+    aspect-ratio: 1;
+    padding: 0.5rem;
+}

@@ -10,7 +10,7 @@
 .links {
     display: grid;
     gap: 5rem;
-    padding-inline: 1rem;
+    padding-inline: 2rem;
 }
 
 .link-txt {

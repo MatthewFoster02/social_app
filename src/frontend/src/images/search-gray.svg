@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="50" height="50">
+	<title>search-svg</title>
+	<defs>
+		<image  width="43" height="44" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAAsAQMAAADGltM7AAAAAXNSR0IB2cksfwAAAAZQTFRFAAAAcHBwjqzZVQAAAAJ0Uk5TAP9bkSK1AAAAjUlEQVR4nH2PQQ6FIAxE62fBkiNwFC5mxJt4FY7iEVy6II7TlujK3xBeAtN2RiRfolWx8p6AnQjAQUSUk0hH6ERuotKySlXYkYXvbJypIrqDTbF9gHPDi39KHdae0WPRWDtMDEs0CLerIWgezaJYlopNs+QrnRY0dkPw2BMMYukp3g3FwfFayf+iK39yAyShR2mHy0cHAAAAAElFTkSuQmCC"/>
+	</defs>
+	<style>
+	</style>
+	<use id="Layer" href="#img1" x="4" y="3"/>
+</svg>
