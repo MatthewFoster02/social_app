@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 
 import users from "../apiHandlers/users.js";
 import './Search.css';
-import search from './images/search-gray.svg';
+import search from '../images/search-gray.svg';
 
 const Search = () => 
 {
