@@ -49,8 +49,8 @@ const HomeHeader = () =>
                         <textarea 
                             placeholder="What are you going to post?"
                             className="make-post"
-                            cols="70"
-                            rows="4"
+                            cols="40"
+                            rows="7"
                             resize="none"
                             name="post"
                             id="post"
@@ -66,8 +66,8 @@ const HomeHeader = () =>
                         <textarea 
                             placeholder="Enter prompt for GPT"
                             className="make-post"
-                            cols="70"
-                            rows="4"
+                            cols="40"
+                            rows="7"
                             resize="none"
                             name="post"
                             id="post"
