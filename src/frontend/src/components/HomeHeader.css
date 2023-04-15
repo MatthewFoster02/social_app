@@ -1,0 +1,44 @@
+.wrapperHH {
+    display: grid;
+    padding: 1rem 2rem;
+}
+
+.form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-post {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.make-post {
+    background-color: black;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    resize: vertical;
+}
+
+.btn-hh {
+    border: none;
+    background-color: white;
+    color: black;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.25rem 0.75rem;
+    border-radius: 100vw;
+}
+
+.btn-hh:hover {
+    cursor: pointer;
+    background-color: lightblue;
+}
+
+.no-display {
+    display: none;
+}
