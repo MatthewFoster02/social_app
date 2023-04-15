@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 import useAuth from "../hooks/useAuth.js";
 import './LeftSidebar.css';
+import homeImg from '../images/home-white.svg';
+import profileImg from '../images/account-white.png';
 
 
 const LeftSidebar = () => 
@@ -19,8 +21,14 @@ const LeftSidebar = () =>
     return (
         <div className="wrapper">
             <div className="links">
-                <Link className="link-txt" to='/'>Home</Link>
-                <Link className="link-txt" to='/user:id'>Profile</Link>
+                <Link className="link-txt" to='/'>
+                    <img src={homeImg} className="home-img" />
+                    Home
+                </Link>
+                <Link className="link-txt" to='/user:id'>
+                    <img src={profileImg} className="profile-img" />
+                    Profile
+                </Link>
             </div>
             {
                 !auth?.username ? (

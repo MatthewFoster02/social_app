@@ -18,6 +18,9 @@
     font-size: 2rem;
     font-weight: bold;
     text-decoration: none;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }
 
 .link-txt:hover {
@@ -59,4 +62,9 @@
 
 .btn-log:hover {
     background-color: lightblue;
+}
+
+.profile-img {
+    height: 2rem;
+    aspect-ratio: 1;
 }

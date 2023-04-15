@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
+import useAuth from '../hooks/useAuth.js';
 import postsAPI from "../apiHandlers/posts.js";
 import './HomeHeader.css';
 
@@ -16,7 +17,7 @@ const HomeHeader = () =>
 
     const createPost = async (content) =>
     {
-
+        if
 
         const post_res = await postsAPI.createPost(content, "");
         // Handle post result
@@ -64,7 +65,7 @@ const HomeHeader = () =>
                 <form onSubmit={handleSubmit(createPost, onErrors)} id="gpt-form" className="no-display">
                     <div className="add-post">
                         <textarea 
-                            placeholder="Enter prompt for GPT"
+                            placeholder="Enter prompt for GPT..."
                             className="make-post"
                             cols="40"
                             rows="7"
