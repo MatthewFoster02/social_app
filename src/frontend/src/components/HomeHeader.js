@@ -8,20 +8,42 @@ import './HomeHeader.css';
 
 const HomeHeader = () => 
 {
+    const { auth, setAuth } = useAuth();
     const [apiError, setApiError] = useState();
     let navigate = useNavigate();
 
     const {
-        handleSubmit
+        register: registerPost, handleSubmit: handleSubmitPost, formState: { errorsPost }
+    } = useForm();
+
+    const {
+        register: registerGPT, handleSubmit: handleSubmitGPT, formState: { errorsGPT }
     } = useForm();
 
     const createPost = async (content) =>
     {
-        if
-
-        const post_res = await postsAPI.createPost(content, "");
-        // Handle post result
-        // Navigate to home page
+        if(!auth?.username)
+        {
+            setApiError('Need to be logged in to create a post...');
+            return;
+        }
+        const post_res = await postsAPI.createPost(
+            {
+                'author': auth.id,
+                'content': content.post,
+                'date_posted': Date.now(),
+                'likes': 0,
+            }, auth.token);
+        if(post_res['statusText'] === 'Created')
+        {
+            navigate('/', { replace: true });
+        }
+        else
+        {
+            let errors = await post_res['data'];
+            console.log(errors);
+            setApiError(errors['detail']);
+        }
     }
 
     const onErrors = (errors) => console.error(errors);
@@ -45,35 +67,51 @@ const HomeHeader = () =>
                 Home
             </h2>
             <div class="form">
-                <form onSubmit={handleSubmit(createPost, onErrors)} id="post-form">
+                <form onSubmit={handleSubmitPost(createPost, onErrors)} id="post-form">
                     <div className="add-post">
-                        <textarea 
-                            placeholder="What are you going to post?"
-                            className="make-post"
-                            cols="40"
-                            rows="7"
-                            resize="none"
-                            name="post"
-                            id="post"
-                        >
-                        </textarea>
+                        <div className="input">
+                            <textarea
+                                placeholder="What are you going to post?"
+                                className="make-post"
+                                cols="40"
+                                rows="7"
+                                resize="none"
+                                name="post"
+                                id="post"
+                                {...registerPost('post', { required: '*Post content required'})}
+                            >
+                            </textarea>
+                            <span className="err">
+                                {
+                                    errorsPost?.post && errorsPost.post.message
+                                }
+                            </span>
+                        </div>
                         <button className="btn-hh">
                             Post
                         </button>
                     </div>
                 </form>
-                <form onSubmit={handleSubmit(createPost, onErrors)} id="gpt-form" className="no-display">
+                <form onSubmit={handleSubmitGPT(createPost, onErrors)} id="gpt-form" className="no-display">
                     <div className="add-post">
-                        <textarea 
-                            placeholder="Enter prompt for GPT..."
-                            className="make-post"
-                            cols="40"
-                            rows="7"
-                            resize="none"
-                            name="post"
-                            id="post"
-                        >
-                        </textarea>
+                        <div className="input">
+                            <textarea
+                                placeholder="Enter prompt for GPT..."
+                                className="make-post"
+                                cols="40"
+                                rows="7"
+                                resize="none"
+                                name="gpt"
+                                id="gpt"
+                                {...registerGPT('gpt', { required: '*Prompt required'})}
+                            >
+                            </textarea>
+                            <span className="err">
+                                {
+                                    errorsGPT?.gpt && errorsGPT.gpt.message
+                                }
+                            </span>
+                        </div>
                         <button className="btn-hh">
                             Ask
                         </button>
@@ -83,6 +121,13 @@ const HomeHeader = () =>
                     Assistant
                 </button>
             </div>
+            {
+                apiError && (
+                    <div className='error-alert'>
+                            <span>{apiError}</span>
+                    </div>
+                )
+            }
         </div>
     );
 }

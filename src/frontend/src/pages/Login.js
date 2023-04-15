@@ -19,10 +19,11 @@ const Login = () =>
     const onFormSubmit = async (data) =>
     {
         const res = await usersAPI.login(data);
-        if(res['statusText'] == 'OK')
+        if(res['statusText'] === 'OK')
         {
             const userDetails = await res['data'];
             let userAuth = {
+                'id': userDetails['user']['_id'],
                 'username': userDetails['user']['username'],
                 'email': userDetails['user']['email'],
                 'token': userDetails['token']
