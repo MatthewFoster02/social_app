@@ -8,8 +8,9 @@ const DisplayPosts = ({props}) =>
 {
     let navigate = useNavigate();
     const { id } = props;
-    const [apiError, setApiError] = useState();
     const [posts, setPosts] = useState([]);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     const [isPending, setIsPending] = useState(true);
 
     useEffect(() =>
@@ -19,29 +20,36 @@ const DisplayPosts = ({props}) =>
             let res_posts = null;
             if(id == null)
             {
-                res_posts = await postsAPI.getPostsNoQuery(1);
+                res_posts = await postsAPI.getPostsNoQuery(page);
             }
             else
             {
-                res_posts = await postsAPI.getPostsByQuery(id, 1);
+                res_posts = await postsAPI.getPostsByQuery(id, page);
             }
-            console.log(res_posts);
             if(res_posts['statusText'] === 'OK')
             {
                 const posts = await res_posts['data'];
                 setPosts(posts.posts);
-                console.log(posts);
+                setTotalPages(posts.totalPages);
                 setIsPending(false);
-            }
-            else
-            {
-                let errors = await res_posts['data'];
-                console.log(errors);
-                setApiError(errors['detail']);
             }
         }
         fetchPosts();
     }, [id]);
+
+    const nextPage = () =>
+    {
+        if(page == totalPages) return;
+
+        setPage(page + 1);
+    }
+
+    const previousPage = () =>
+    {
+        if(page == 1) return;
+
+        setPage(page - 1);
+    }
 
     return (
         <div className="wrapperDP">
