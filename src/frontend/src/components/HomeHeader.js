@@ -48,7 +48,7 @@ const HomeHeader = () =>
 
     const onErrors = (errors) => console.error(errors);
 
-    // GPT API stuff
+    // GPT API / create post osttoggle
     const toggleGPT = () =>
     {
         const formPost = document.getElementById('post-form');
@@ -61,12 +61,24 @@ const HomeHeader = () =>
         switchBtn.innerHTML === 'Assistant' ? switchBtn.innerHTML = 'Post' : switchBtn.innerHTML = 'Assistant';
     }
 
+    const askGPT = async (prompt) =>
+    {
+        const promptTxt = "Social media post on: " + prompt.gpt;
+        const txtArea = document.getElementById('post');
+
+        const response = await postsAPI.getGPTResponse({'prompt': promptTxt.toString()});
+        const gpt_response = await response['data'];
+        console.log(gpt_response);
+        toggleGPT();
+        txtArea.value = gpt_response;
+    }
+
     return (
         <div className="wrapperHH">
             <h2 className="titleLogin">
                 Home
             </h2>
-            <div class="form">
+            <div className="form">
                 <form onSubmit={handleSubmitPost(createPost, onErrors)} id="post-form">
                     <div className="add-post">
                         <div className="input">
@@ -92,7 +104,7 @@ const HomeHeader = () =>
                         </button>
                     </div>
                 </form>
-                <form onSubmit={handleSubmitGPT(createPost, onErrors)} id="gpt-form" className="no-display">
+                <form onSubmit={handleSubmitGPT(askGPT, onErrors)} id="gpt-form" className="no-display">
                     <div className="add-post">
                         <div className="input">
                             <textarea

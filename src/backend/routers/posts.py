@@ -2,8 +2,9 @@ from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Request, Response, status, Body
 from fastapi.responses import JSONResponse
 
+import gpt
 from crud import posts, users
-from models.posts import PostBase
+from models.posts import PostBase, GptBase
 from authentication import Authorization
 
 router = APIRouter()
@@ -25,6 +26,10 @@ async def get_all(request:Request, userID:Optional[str]=None, page:int=1):
         if user is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'User with id: {userID} not found')
     return await posts.getAllPosts(request, userID, page)
+
+@router.post('/gpt', response_description='Give prompt to GPT API and return response')
+async def get_gpt_response(body:GptBase=Body(...)):
+    return await gpt.get_response(body.prompt)
 
 @router.get('/{id}', response_description='Get post with ID')
 async def post_by_id(request:Request, id:str):

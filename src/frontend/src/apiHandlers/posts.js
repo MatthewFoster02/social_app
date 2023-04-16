@@ -40,5 +40,10 @@ class PostsAPIConnection
     {
         return axiosConfig.get(baseURL + `/comment/${id}`);
     }
+
+    getGPTResponse(body)
+    {
+        return axiosConfig.post(baseURL + '/gpt', body);
+    }
 }
 export default new PostsAPIConnection();
