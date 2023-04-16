@@ -19,3 +19,7 @@ main {
   overflow-y: scroll;
   background-color: black;
 }
+
+p {
+  margin: 0;
+}

@@ -1,0 +1,65 @@
+.post-layout {
+    display: grid;
+    gap: 1rem;
+
+    border: 1px solid #707070;
+    padding-inline: 1.5rem;
+    padding-block: 1.5rem 0;
+    border-radius: 1.5rem;
+    text-decoration: none;
+    color: white;
+}
+
+.post-layout:hover {
+    background-color: #0f0f10;
+}
+
+.profile-info {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.profile-pic {
+    height: 2.5rem;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.profile-name {
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.profile-name:hover {
+    color: lightblue;
+}
+
+.post-content {
+    font-size: 1.2rem;
+}
+
+.statistics {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    padding: 0.5rem 1rem;
+    border-top: 1px solid #707070;
+}
+
+.likes,
+.comments {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.like-img,
+.comment-img {
+    height: 1rem;
+    aspect-ratio: 1;
+}

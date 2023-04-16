@@ -31,7 +31,7 @@ const DisplayPosts = ({props}) =>
             if(res_posts['statusText'] === 'OK')
             {
                 const posts = await res_posts['data'];
-                setPosts(posts.posts);
+                setPosts(posts.posts.reverse());
                 setTotalPages(posts.totalPages);
                 setIsPending(false);
             }

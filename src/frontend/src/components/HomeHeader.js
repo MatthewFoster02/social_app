@@ -38,7 +38,7 @@ const HomeHeader = () =>
             }, auth.token);
         if(post_res['statusText'] === 'Created')
         {
-            navigate('/', { replace: true });
+            navigate('/', { replace: false });
         }
         else
         {
