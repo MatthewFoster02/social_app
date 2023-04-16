@@ -4,10 +4,14 @@ import "./HomePage.css";
 
 const HomePage = () => 
 {
+    const id = {
+        id: null
+    }
+    
     return (
         <div className="wrapperHP">
             <HomeHeader />
-            <DisplayPosts />
+            <DisplayPosts props={id} />
         </div>
     );
 }

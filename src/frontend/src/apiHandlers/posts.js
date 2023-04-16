@@ -11,6 +11,11 @@ class PostsAPIConnection
         return axiosConfig.post(baseURL + '/', body, {headers: {Authorization: `Bearer ${token}`}});
     }
 
+    getPostsNoQuery(page)
+    {
+        return axiosConfig.get(baseURL + `/?page=${page}`);
+    }
+
     getPostsByQuery(query, page)
     {
         return axiosConfig.get(baseURL + `/?userID=${query}&page=${page}`);
