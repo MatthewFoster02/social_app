@@ -47,18 +47,15 @@
     display: none;
 }
 
-/* Track */
 textarea::-webkit-scrollbar {
     width: 0.1rem;
 }
 
-/* Handle */
 textarea::-webkit-scrollbar-thumb {
     background: white;
     border-radius: 50vh;
 }
 
-/* Handle on hover */
 textarea::-webkit-scrollbar-thumb:hover {
     background: #c8c6c6;
 }
