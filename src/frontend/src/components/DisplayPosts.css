@@ -1,0 +1,6 @@
+.wrapperDP {
+    border-top: 1px solid #707070;
+    padding: 2rem 3rem;
+    display: grid;
+    gap: 2rem;
+}

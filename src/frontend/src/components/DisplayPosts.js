@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
 import postsAPI from '../apiHandlers/posts.js';
+import usersAPI from '../apiHandlers/users.js';
 import Post from "./Post.js";
+import './DisplayPosts.css';
 
 const DisplayPosts = ({props}) => 
 {
@@ -35,24 +37,29 @@ const DisplayPosts = ({props}) =>
             }
         }
         fetchPosts();
-    }, [id]);
+    }, [id, page]);
 
     const nextPage = () =>
     {
-        if(page == totalPages) return;
+        if(page === totalPages) return;
 
         setPage(page + 1);
     }
 
     const previousPage = () =>
     {
-        if(page == 1) return;
+        if(page === 1) return;
 
         setPage(page - 1);
     }
 
     return (
         <div className="wrapperDP">
+            {
+                isPending && <div>
+                    <h2>Loading Posts...</h2>
+                </div>
+            }
             {
                 posts && posts.map((el) =>
                 {

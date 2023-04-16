@@ -1,6 +1,17 @@
 .wrapperHP {
     background-color: black;
     color: white;
-    height: 100vh;
-    border-right: 1px solid #707070;
+}
+
+::-webkit-scrollbar {
+    width: 0.1rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 50vh;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: black;
 }

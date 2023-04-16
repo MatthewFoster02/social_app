@@ -1,4 +1,6 @@
 .wrapperRS {
     background-color: black;
     color: white;
+    border-left: 1px solid #707070;
+    position: sticky;
 }

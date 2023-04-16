@@ -33,6 +33,8 @@ const HomeHeader = () =>
                 'content': content.post,
                 'date_posted': Date.now(),
                 'likes': 0,
+                'author_profile_pic': auth.profile_pic,
+                'author_username': auth.username,
             }, auth.token);
         if(post_res['statusText'] === 'Created')
         {

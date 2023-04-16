@@ -5,6 +5,7 @@
 
     display: grid;
     align-items: end;
+    position: sticky;
 }
 
 .links {
