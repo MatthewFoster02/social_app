@@ -50,5 +50,10 @@ class PostsAPIConnection
     {
         return axiosConfig.post(baseURL + '/gpt', body);
     }
+
+    updatePostPictures(body)
+    {
+        return axiosConfig.patch(baseURL + '/update-pic', body);
+    }
 }
 export default new PostsAPIConnection();

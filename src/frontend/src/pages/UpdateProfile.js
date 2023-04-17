@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import './UpdateProfile.css';
 import usersAPI from '../apiHandlers/users.js';
+import postsAPI from '../apiHandlers/posts.js';
 import useAuth from '../hooks/useAuth.js';
 
 const UpdateProfile = () => 
@@ -36,16 +37,15 @@ const UpdateProfile = () =>
         const birthday = date.getTime();
         formData.append('birthday', birthday);
 
-        for (const [key, value] of formData.entries())
-        {
-            console.log(`${key}: ${value}`);
-        }
+        // for (const [key, value] of formData.entries())
+        // {
+        //     console.log(`${key}: ${value}`);
+        // }
         // send the form data using Axios
         const updated_user = await usersAPI.update(auth.id, formData, auth.token);
         if(updated_user['statusText'] === 'OK')
         {
             const userDetails = await updated_user['data'];
-            console.log(userDetails);
             let userAuth = {
                 'id': userDetails['_id'],
                 'username': userDetails['username'],
@@ -57,6 +57,10 @@ const UpdateProfile = () =>
             }
             setAuth(userAuth);
             setApiError(null);
+            postsAPI.updatePostPictures({
+                'authorID': userDetails['_id'],
+                'profile_pic_url': userDetails['profile_pic']
+            });
             navigate('/', { replace: true });
         }
         else

@@ -28,7 +28,6 @@ class UsersAPIConnection
     
     update(id, body, token)
     {
-        console.log(body);
         return axiosConfig.patch(baseURL + `/${id}`, body, {headers: {'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}`}});
     }
 
