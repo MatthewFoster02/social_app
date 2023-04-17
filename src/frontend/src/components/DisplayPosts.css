@@ -4,3 +4,39 @@
     display: grid;
     gap: 2rem;
 }
+
+.page-location {
+    display: flex;
+    justify-content: center;
+}
+
+.current-page {
+    font-weight: bolder;
+    color: lightblue;
+}
+
+.total-pages {
+    font-weight: bolder;
+}
+
+.page-navigation {
+    display: flex;
+    justify-content: space-between;
+}
+
+.previous-page,
+.next-page {
+    border: none;
+    background-color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    color: black;
+    padding: 0.4rem 0.8rem;
+    border-radius: 100vw;
+}
+
+.previous-page:hover,
+.next-page:hover {
+    cursor: pointer;
+    background-color: lightblue;
+}
