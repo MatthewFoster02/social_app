@@ -24,16 +24,13 @@ const Profile = () =>
             if(userInfo['statusText'] === 'OK')
             {
                 const userData = await userInfo['data'];
-                console.log(userData);
                 setUser(userData);
                 setIsPending(false);
                 setApiError(null);
-
-                if(user.birthday != null)
+                if(userData.birthday != null)
                 {
-                    const birthMillisecs = user.birthday;
+                    const birthMillisecs = userData.birthday;
                     const date = new Date(birthMillisecs);
-                    console.log(date);
                     const day = date.getDate();
                     const month = date.getMonth() + 1;
                     const year = date.getFullYear();
@@ -58,7 +55,7 @@ const Profile = () =>
     }, [id]);
 
     return (
-        <div>
+        <div className="contain">
             <div className="wrapper-profile">
                 {
                     isPending && <div>
@@ -78,6 +75,13 @@ const Profile = () =>
                     <p className="bio">{user.bio}</p>
                     <div className="birthday">Birthday: {birthday}</div>
                 </div>
+                {
+                    apiError && (
+                        <div className='error-alert'>
+                                <span>{apiError}</span>
+                        </div>
+                    )
+                }
             </div>
             <DisplayPosts props={id} />
         </div>

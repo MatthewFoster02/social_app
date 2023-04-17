@@ -8,9 +8,6 @@ import './DisplayPosts.css';
 const DisplayPosts = ({props}) => 
 {
     let navigate = useNavigate();
-    console.log(props);
-    const { id } = props;
-    console.log(id);
     const [posts, setPosts] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
@@ -21,13 +18,13 @@ const DisplayPosts = ({props}) =>
         async function fetchPosts()
         {
             let res_posts = null;
-            if(id == null)
+            if(props == null)
             {
                 res_posts = await postsAPI.getPostsNoQuery(page);
             }
             else
             {
-                res_posts = await postsAPI.getPostsByQuery(id, page);
+                res_posts = await postsAPI.getPostsByQuery(props, page);
             }
             if(res_posts['statusText'] === 'OK')
             {
@@ -38,7 +35,7 @@ const DisplayPosts = ({props}) =>
             }
         }
         fetchPosts();
-    }, [id, page]);
+    }, [props, page]);
 
     const nextPage = () =>
     {
