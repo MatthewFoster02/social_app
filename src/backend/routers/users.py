@@ -1,10 +1,13 @@
-from fastapi import APIRouter, Body, Depends, HTTPException, Request, Response, status
+from io import BytesIO
+from typing import Optional
+from fastapi import APIRouter, Body, Depends, File, Form, HTTPException, Request, Response, UploadFile, status
 from fastapi.responses import JSONResponse
 from decouple import config
 
 from crud import users
 from models.users import LoginBase, UserBase, UserUpdate
 from authentication import Authorization
+from image_handling.change_image import resize_image
 
 # Get the default profile pic from environment variable, used when no profile pic is specified upon registering
 DEFAULT_PROFILE_PIC_URL = config('DEFAULT_PROFILE_PICTURE', cast=str)
@@ -59,11 +62,24 @@ async def get_user_by_query(request:Request, query:str):
     raise HTTPException(status_code=404, detail=f'No users found matching {query}')
 
 @router.patch('/{id}', response_description='Update user with ID')
-async def update_user(request:Request, id:str, user:UserUpdate=Body(...), userID=Depends(authorization.authWrapper)):
+async def update_user(request:Request,
+                      id:str,
+                      username:str=Form(...),
+                      bio:str=Form(...),
+                      profile_picture:UploadFile=File(...),
+                      userID=Depends(authorization.authWrapper)):
+    print(username, bio, profile_picture)
     # Check if the user to be updated is the user that is authenticated
     if not id == userID:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Only user can update their profile')
     
+    profile_pic_url = await resize_image(profile_picture)
+    updatedUser = {
+        'username': username,
+        'bio': bio,
+        'profile_pic': profile_pic_url
+    }
+    user = UserUpdate(**updatedUser)
     updated_user = await users.updateUser(request, userID, user)
 
     if updated_user is not None:

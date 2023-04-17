@@ -1,4 +1,3 @@
-import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -10,32 +9,28 @@ const UpdateProfile = () =>
 {
     const { auth, setAuth } = useAuth();
     const [apiError, setApiError] = useState();
+    const [username, setUsername] = useState(auth.username);
+    const [bio, setBio] = useState(auth.bio);
+    const [picture, setPicture] = useState(null);
     let navigate = useNavigate();
 
-    const {
-        register, handleSubmit, formState: { errors }
-    } = useForm();
-
-    const onFormSubmit = async () =>
+    const handleSubmit = async (e) =>
     {
-        // get the file input element from the form
-        const imageFile = document.getElementById('profile-pic').files[0];
-
-        // create a new FormData object
+        e.preventDefault();
         const formData = new FormData();
 
-        // append the image file to the FormData object
-        formData.append('profile-picture', imageFile);
+        formData.append('profile_picture', picture);
+        formData.append('username', username);
+        formData.append('bio', bio);
 
-        // append other form data fields as needed
-        formData.append('username', 'JohnDoe');
-        formData.append('bio', 'Hello, I am John Doe!');
-
+        for (const [key, value] of formData.entries())
+        {
+            console.log(`${key}: ${value}`);
+        }
         // send the form data using Axios
         const updated_user = await usersAPI.update(auth.id, formData, auth.token);
+        console.log(updated_user);
     }
-
-    const onErrors = (errors) => console.error(errors);
 
     return (
         <div className='wrapperLogin'>
@@ -43,7 +38,7 @@ const UpdateProfile = () =>
                 <h2 className='titleLogin'>
                     Update Profile:
                 </h2>
-                <form onSubmit={handleSubmit(onFormSubmit, onErrors)}>
+                <form onSubmit={handleSubmit}>
                     <div className='inputs'>
                         <div className='input'>
                             <label htmlFor='username'>Username:</label>
@@ -53,15 +48,10 @@ const UpdateProfile = () =>
                                 className='input-style'
                                 name='username'
                                 autoComplete='off'
-                                value={auth.username}
+                                value={username}
                                 id='username'
-                                {...register('username', { required: '*Your username is required'})}
-                            />
-                            <span className="err">
-                                {
-                                    errors?.username && errors.username.message
-                                }
-                            </span>
+                                onChange={(e) => setUsername(e.target.value)}
+                                />
                         </div>
                         <div className='input'>
                             <label htmlFor='bio'>Bio:</label>
@@ -71,15 +61,10 @@ const UpdateProfile = () =>
                                 className='input-style'
                                 name='bio'
                                 autoComplete='off'
-                                value={auth.bio}
+                                value={bio}
                                 id='bio'
-                                {...register('bio', { required: '*Your bio is required'})}
-                            />
-                            <span className="err">
-                                {
-                                    errors?.bio && errors.bio.message
-                                }
-                            </span>
+                                onChange={(e) => setBio(e.target.value)}
+                                />
                         </div>
                         <div className='input'>
                             <label htmlFor='profile-pic'>Profile picture:</label>
@@ -88,6 +73,7 @@ const UpdateProfile = () =>
                                 className='input-style'
                                 name='profile-pic'
                                 id='profile-pic'
+                                onChange={(e) => setPicture(e.target.files[0])}
                             />
                         </div>
                         <button className='submit-btn'>
