@@ -1,25 +1,40 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import users from "../apiHandlers/users.js";
 import './Search.css';
 import search from '../images/search-gray.svg';
+import ProfilePreview from "./ProfilePreview.js";
 
 const Search = () => 
 {
     const [apiError, setApiError] = useState();
-    let navigate = useNavigate();
+    const [profiles, setProfiles] = useState([]);
+    const [isPending, setIsPending] = useState(false);
 
     const {
-        handleSubmit
+        register, handleSubmit, formState: { errors }
     } = useForm();
 
     const searchByString = async (query) =>
     {
-        const query_res = await users.getUsers(query);
-        // Handle query
-        // Navigate to results of search
+        setIsPending(true);
+        const query_res = await users.getUsers(query.search);
+        if(query_res['statusText'] === 'OK')
+        {
+            const profileData = await query_res['data'];
+            setProfiles(profileData.slice(0, 3));
+            setIsPending(false);
+            setApiError(null);
+        }
+        else
+        {
+            const errors = await query_res['data']
+            console.log(errors);
+            setApiError(errors['detail']);
+            setProfiles([]);
+            setIsPending(false);
+        }
     }
 
     const onErrors = (errors) => console.error(errors);
@@ -31,16 +46,47 @@ const Search = () =>
             </h2>
             <form onSubmit={handleSubmit(searchByString, onErrors)}>
                 <div className="searchbar">
-                    <input 
+                    <input
                         type="text"
                         placeholder="Who are you looking for?"
                         className="searchbarStyle"
+                        autoComplete="off"
+                        name="search"
+                        id="search"
+                        {...register('search', { required: '*Some text required for search'})}
                     />
                     <button className="search">
                         <img className="mag-glass" src={search} />
                     </button>
                 </div>
+                <span className="err">
+                    {
+                        errors?.search && errors.search.message
+                    }
+                </span>
             </form>
+            {
+                apiError && (
+                    <div className='error-alert'>
+                            <span>{apiError}</span>
+                    </div>
+                )
+            }
+            <div className="search-results">
+                {
+                    isPending && <div>
+                        <h2>Loading Profiles...</h2>
+                    </div>
+                }
+                {
+                    profiles && profiles.map((el) =>
+                    {
+                        return (
+                            <ProfilePreview key={el._id} profile={el} />
+                        )
+                    })
+                }
+            </div>
         </div>
     );
 }

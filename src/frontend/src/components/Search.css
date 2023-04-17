@@ -39,3 +39,9 @@
     aspect-ratio: 1;
     padding: 0.5rem;
 }
+
+.search-results {
+    display: grid;
+    gap: 1rem;
+    padding-block: 1rem;
+}

@@ -30,11 +30,9 @@ const DisplayPosts = ({props}) =>
             if(res_posts['statusText'] === 'OK')
             {
                 const posts = await res_posts['data'];
-                console.log(posts);
                 setPosts(posts.posts.reverse());
                 setTotalPages(posts.total_pages);
                 setIsPending(false);
-                console.log('TOTAL PAGES: '+totalPages);
             }
         }
         fetchPosts();
