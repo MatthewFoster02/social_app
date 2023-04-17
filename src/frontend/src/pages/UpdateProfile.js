@@ -8,10 +8,16 @@ import useAuth from '../hooks/useAuth.js';
 const UpdateProfile = () => 
 {
     const { auth, setAuth } = useAuth();
+    const birthMillisecs = auth.birthday;
+    const date = new Date(birthMillisecs);
+
     const [apiError, setApiError] = useState();
     const [username, setUsername] = useState(auth.username);
     const [bio, setBio] = useState(auth.bio);
     const [picture, setPicture] = useState(null);
+    const [day, setDay] = useState(date.getDate());
+    const [month, setMonth] = useState(date.getMonth() + 1);
+    const [year, setYear] = useState(date.getFullYear());
     let navigate = useNavigate();
 
     const handleSubmit = async (e) =>
@@ -19,9 +25,16 @@ const UpdateProfile = () =>
         e.preventDefault();
         const formData = new FormData();
 
-        formData.append('profile_picture', picture);
+        if(picture != null)
+        {
+            formData.append('profile_picture', picture);
+        }
         formData.append('username', username);
         formData.append('bio', bio);
+
+        const date = new Date(year, month-1, day);
+        const birthday = date.getTime();
+        formData.append('birthday', birthday);
 
         for (const [key, value] of formData.entries())
         {
@@ -29,7 +42,29 @@ const UpdateProfile = () =>
         }
         // send the form data using Axios
         const updated_user = await usersAPI.update(auth.id, formData, auth.token);
-        console.log(updated_user);
+        if(updated_user['statusText'] === 'OK')
+        {
+            const userDetails = await updated_user['data'];
+            console.log(userDetails);
+            let userAuth = {
+                'id': userDetails['_id'],
+                'username': userDetails['username'],
+                'email': userDetails['email'],
+                'profile_pic': userDetails['profile_pic'],
+                'bio': userDetails['bio'],
+                'birthday': userDetails['birthday'],
+                'token': auth.token
+            }
+            setAuth(userAuth);
+            setApiError(null);
+            navigate('/', { replace: true });
+        }
+        else
+        {
+            let errors = await updated_user['data'];
+            console.log(errors);
+            setApiError(errors['detail']);
+        }
     }
 
     return (
@@ -67,6 +102,41 @@ const UpdateProfile = () =>
                                 />
                         </div>
                         <div className='input'>
+                            <label>Birthday: </label>
+                            <div className="birthday-inputs">
+                                <input
+                                    type='number'
+                                    placeholder='DD'
+                                    className='input-style'
+                                    name='day'
+                                    autoComplete='off'
+                                    id='day'
+                                    value={day}
+                                    onChange={(e) => setDay(e.target.value)}
+                                />
+                                <input
+                                    type='number'
+                                    placeholder='MM'
+                                    className='input-style'
+                                    name='month'
+                                    autoComplete='off'
+                                    id='month'
+                                    value={month}
+                                    onChange={(e) => setMonth(e.target.value)}
+                                />
+                                <input
+                                    type='number'
+                                    placeholder='YYYY'
+                                    className='input-style'
+                                    name='year'
+                                    autoComplete='off'
+                                    id='year'
+                                    value={year}
+                                    onChange={(e) => setYear(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        <div className='input'>
                             <label htmlFor='profile-pic'>Profile picture:</label>
                             <input
                                 type='file'
@@ -74,6 +144,7 @@ const UpdateProfile = () =>
                                 name='profile-pic'
                                 id='profile-pic'
                                 onChange={(e) => setPicture(e.target.files[0])}
+                                required
                             />
                         </div>
                         <button className='submit-btn'>

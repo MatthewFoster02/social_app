@@ -1,3 +1,12 @@
 .wrapperUP {
     color: white;
 }
+
+.birthday-inputs {
+    display: flex;
+    gap: 1rem;
+}
+
+.birthday-inputs > input {
+    max-width: 6rem;
+}

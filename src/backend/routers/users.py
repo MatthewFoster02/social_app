@@ -64,8 +64,9 @@ async def get_user_by_query(request:Request, query:str):
 @router.patch('/{id}', response_description='Update user with ID')
 async def update_user(request:Request,
                       id:str,
-                      username:str=Form(...),
-                      bio:str=Form(...),
+                      username:Optional[str]=Form(...),
+                      bio:Optional[str]=Form(...),
+                      birthday:Optional[int]=Form(...),
                       profile_picture:UploadFile=File(...),
                       userID=Depends(authorization.authWrapper)):
     print(username, bio, profile_picture)
@@ -77,6 +78,7 @@ async def update_user(request:Request,
     updatedUser = {
         'username': username,
         'bio': bio,
+        'birthday': birthday,
         'profile_pic': profile_pic_url
     }
     user = UserUpdate(**updatedUser)
