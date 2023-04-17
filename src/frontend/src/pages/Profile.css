@@ -1,3 +1,48 @@
 .wrapper-profile {
     color: white;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #707070;
+}
+
+.profile-pic-update {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.profile-pic-lg {
+    height: 6rem;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.update-profile-btn {
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 100vw;
+    font-size: 1.5rem;
+    font-weight: bolder;
+}
+
+.update-profile-btn:hover {
+    background-color: lightblue;
+}
+
+.user-info {
+    display: grid;
+    gap: 1rem;
+}
+
+.bio {
+    font-size: 1.25rem;
+}
+
+.birthday {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #707070;
 }

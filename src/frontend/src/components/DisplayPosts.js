@@ -8,7 +8,9 @@ import './DisplayPosts.css';
 const DisplayPosts = ({props}) => 
 {
     let navigate = useNavigate();
+    console.log(props);
     const { id } = props;
+    console.log(id);
     const [posts, setPosts] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
