@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import users from "../apiHandlers/users.js";
@@ -13,12 +13,13 @@ const Search = () =>
     const [isPending, setIsPending] = useState(false);
 
     const {
-        register, handleSubmit, formState: { errors }
+        register, handleSubmit, formState: { errors }, watch
     } = useForm();
 
     const searchByString = async (query) =>
     {
         setIsPending(true);
+        setProfiles([]);
         const query_res = await users.getUsers(query.search);
         if(query_res['statusText'] === 'OK')
         {
@@ -36,6 +37,13 @@ const Search = () =>
             setIsPending(false);
         }
     }
+
+    useEffect(() => {
+        const searchValue = watch('search');
+        if (searchValue === '') {
+            setProfiles([]);
+        }
+    }, [watch('search')]);
 
     const onErrors = (errors) => console.error(errors);
 
@@ -59,11 +67,6 @@ const Search = () =>
                         <img className="mag-glass" src={search} />
                     </button>
                 </div>
-                <span className="err">
-                    {
-                        errors?.search && errors.search.message
-                    }
-                </span>
             </form>
             {
                 apiError && (
