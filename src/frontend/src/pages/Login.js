@@ -27,6 +27,7 @@ const Login = () =>
                 'username': userDetails['user']['username'],
                 'email': userDetails['user']['email'],
                 'profile_pic': userDetails['user']['profile_pic'],
+                'bio': userDetails['user']['bio'],
                 'token': userDetails['token']
             }
             setAuth(userAuth);

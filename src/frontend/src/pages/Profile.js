@@ -68,7 +68,7 @@ const Profile = () =>
                 <div className="profile-pic-update">
                     <img src={user.profile_pic} className="profile-pic-lg" alt="" />
                     {
-                        auth.id === id && <Link to='' className='update-profile-btn'>Update Profile</Link>
+                        auth.id === id && <Link to='/profile/update' className='update-profile-btn'>Update Profile</Link>
                     }
                 </div>
                 <div className="user-info">
