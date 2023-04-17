@@ -25,10 +25,15 @@ const LeftSidebar = () =>
                     <img src={homeImg} className="home-img" />
                     Home
                 </Link>
-                <Link className="link-txt" to='/user:id'>
-                    <img src={profileImg} className="profile-img" />
-                    Profile
-                </Link>
+                {
+                    auth?.id ? <Link className="link-txt" to={`/profile/${auth.id}`}>
+                        <img src={profileImg} className="profile-img" />
+                        Profile
+                    </Link> : <Link className="link-txt" to={'/login'}>
+                        <img src={profileImg} className="profile-img" />
+                        Profile
+                    </Link>
+                }
             </div>
             {
                 !auth?.username ? (
