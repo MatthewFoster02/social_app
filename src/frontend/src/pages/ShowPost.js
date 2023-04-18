@@ -87,7 +87,7 @@ const ShowPost = () =>
                 }
             </div>
             <AddComment />
-            <Comments />
+            <Comments id={{'id': id}}/>
         </div>
     );
 }

@@ -12,6 +12,7 @@ class PostBase(MongoBaseModel):
     comments:Optional[List[str]] = None
     author_profile_pic:str = Field(...)
     author_username:str = Field(...)
+    comment:bool = Field(...)
 
 class GptBase(BaseModel):
     prompt:str = Field(...)

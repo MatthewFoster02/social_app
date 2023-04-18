@@ -80,7 +80,7 @@ async def get_all_comments(request:Request, id:str):
     comments = await posts.getCommentsByID(request, id)
 
     if comments == 'No comments':
-        return JSONResponse(status_code=status.HTTP_200_OK, content={'message': 'No comments'})
+        return JSONResponse(status_code=status.HTTP_202_ACCEPTED, content={'message': 'No comments'})
     
     if not comments == 'No post':
         return comments
@@ -89,5 +89,4 @@ async def get_all_comments(request:Request, id:str):
 
 @router.patch('/update-pic', response_description='Update profile pictures of authors')
 async def updatePostPic(request:Request, authorID:str=Body(...), profile_pic_url:str=Body(...)):
-    print(f'AuthorID: {authorID} - profile_url: {profile_pic_url}')
     await posts.updatePostPic(request, authorID, profile_pic_url)
