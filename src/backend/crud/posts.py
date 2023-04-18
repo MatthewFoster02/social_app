@@ -35,6 +35,10 @@ async def getPostByID(request:Request, postID:str):
     return PostBase(**post) if post is not None else None
 
 async def deletePost(request:Request, postID:str):
+    post = await request.app.mongodb['posts'].find_one({'_id': postID})
+    if not post['comments'] is None:
+        for comment_id in post['comments']:
+            await deletePost(request, comment_id)
     deleted = await request.app.mongodb['posts'].delete_one({'_id': postID})
     return deleted.deleted_count == 1
 
@@ -70,7 +74,6 @@ async def getCommentsByID(request:Request, id:str):
     comments = []
     for commentID in post['comments']:
         comment = await getPostByID(request, commentID)
-        print(f"Comment {comment}")
         comments.append(comment)
     return comments
 
@@ -84,10 +87,7 @@ async def removeComment(request:Request, id:str):
         return 'No comments'
     
     old_comments = parentPost['comments']
-    print(f"Old Comments {old_comments}")
-    print(f"ID {id}")
     old_comments.remove(id)
-    print(f"New Comments {old_comments}")
     await request.app.mongodb['posts'].update_one(
         {'_id': parentPost['_id']}, {'$set': {'comments': old_comments}}
     )

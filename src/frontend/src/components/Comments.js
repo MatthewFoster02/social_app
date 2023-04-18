@@ -33,7 +33,6 @@ const Comments = ({id}) =>
             else if(commentsData['statusText'] === 'Accepted')
             {
                 const message = await commentsData['data'];
-                console.log(message);
                 setNoComments(message['message']);
                 setApiError(null);
                 setComments(null);
