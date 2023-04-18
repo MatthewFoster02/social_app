@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import './ShowPost.css';
@@ -7,14 +7,17 @@ import comment from '../images/comment-white.png';
 import postsAPI from '../apiHandlers/posts.js';
 import AddComment from '../components/AddComment.js';
 import Comments from '../components/Comments.js';
+import useAuth from "../hooks/useAuth.js";
 
 const ShowPost = () => 
 {
+    const { auth, setAuth } = useAuth();
     const { id } = useParams();
     const [post, setPost] = useState({});
     const [isPending, setIsPending] = useState(true);
     const [apiError, setApiError] = useState();
     const [datePosted, setDatePosted] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() =>
     {
@@ -44,7 +47,24 @@ const ShowPost = () =>
             }
         }
         fetchPost();
-    }, []);
+    }, [id]);
+
+    const deletePost = async () =>
+    {
+        const deleted_result = await postsAPI.delete(id, auth.token, post.comment);
+        if(deleted_result['statusText'] === 'No Content')
+        {
+            setPost(null);
+            alert('Post successfully deleted.');
+            navigate('/', { replace: true }); 
+        }
+        else
+        {
+            const errors = await deleted_result['data'];
+            console.log(errors);
+            setApiError(errors['detail']);
+        }
+    }
 
     return (
         <div className='wrapperSP'>
@@ -58,7 +78,12 @@ const ShowPost = () =>
             </h2>
             <div className="post-container">
                 <div className="post-main">
-                    <img src={post.author_profile_pic} className="post-profile-picture" alt="" />
+                    <div className="pic-delete">
+                        <img src={post.author_profile_pic} className="post-profile-picture" alt="" />
+                        {
+                            auth.id === post.author && <button className="delete-post" onClick={deletePost}>Delete Post</button>
+                        }
+                    </div>
                     <p className="post-content">{post.content}</p>
                 </div>
                 <div className="post-stats">

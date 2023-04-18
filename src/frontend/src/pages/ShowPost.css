@@ -44,3 +44,25 @@
     display: flex;
     gap: 1rem;
 }
+
+.pic-delete {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete-post {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    color: red;
+    border: none;
+    background-color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 100vw;
+}
+
+.delete-post:hover {
+    cursor: pointer;
+    background-color: red;
+    color: white;
+}

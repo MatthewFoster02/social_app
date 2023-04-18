@@ -44,7 +44,7 @@ const Comments = ({id}) =>
             }
         }
         fetchComments();
-    }, []);
+    }, [id]);
 
     return (
         <div className="wrapperC">

@@ -11,9 +11,9 @@ const AddComment = () =>
         register, handleSubmit, formState: { errors }
     } = useForm();
 
-    const addComment = () =>
+    const addComment = async (data) =>
     {
-        // ADD COMMENTw
+        // ADD COMMENT
     }
 
     const onErrors = (errors) => console.error(errors);
