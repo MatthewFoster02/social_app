@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 from decouple import config
 
 from crud import users
-from models.users import LoginBase, UserBase, UserUpdate
+from models.users import LoginBase, UserBase, UserUpdate, CurrentUser
 from authentication import Authorization
 from image_handling.change_image import resize_image
 
@@ -43,6 +43,14 @@ async def login(request:Request, loginUser:LoginBase=Body(...)):
     # Generate token, return along with user that has been logged in
     token = authorization.encodeToken(user['_id'])
     return JSONResponse(content={'user': user, 'token': token})
+
+@router.get('/me', response_description='Logged in user\'s data')
+async def me(request:Request, userID=Depends(authorization.authWrapper)) -> JSONResponse:
+    print('HERE: '+userID)
+    currentUser = await request.app.mongodb['users'].find_one({'_id': userID})
+    result = CurrentUser(**currentUser).dict()
+    result['id'] = userID
+    return JSONResponse(status_code=status.HTTP_200_OK, content=result)
 
 @router.get('/{id}', response_description='Get user by ID')
 async def user_by_id(request:Request, id:str):

@@ -38,3 +38,10 @@ class UserUpdate(MongoBaseModel):
 class LoginBase(BaseModel):
     email:str = EmailStr(...)
     password:str = Field(...)
+
+class CurrentUser(BaseModel):
+    email: str = EmailStr(...)
+    username: str = Field(...)
+    profile_pic: str = Field(...)
+    bio: str = Field(...)
+    birthday: int = Field(...)

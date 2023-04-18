@@ -35,5 +35,10 @@ class UsersAPIConnection
     {
         return axiosConfig.delete(baseURL + `/${id}`, {headers: {Authorization: `Bearer ${token}`}});
     }
+
+    checkDetails(token)
+    {
+        return axiosConfig.get(baseURL + '/me', {headers: {Authorization: `Bearer ${token}`}});
+    }
 }
 export default new UsersAPIConnection();

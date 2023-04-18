@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 import useAuth from "../hooks/useAuth.js";
 import './LeftSidebar.css';
@@ -14,6 +15,7 @@ const LeftSidebar = () =>
 
     const logout = () =>
     {
+        Cookies.remove('jwtToken');
         setAuth({});
         navigate('/login', {replace: true});
     }

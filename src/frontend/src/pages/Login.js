@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 import useAuth from '../hooks/useAuth.js';
 import usersAPI from '../apiHandlers/users.js';
@@ -31,6 +32,7 @@ const Login = () =>
                 'birthday': userDetails['user']['birthday'],
                 'token': userDetails['token']
             }
+            Cookies.set('jwtToken', userDetails['token'], { expires: 1 });
             setAuth(userAuth);
             setApiError(null);
             navigate('/', { replace: true });
