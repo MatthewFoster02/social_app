@@ -39,7 +39,8 @@ const HomeHeader = () =>
             }, auth.token);
         if(post_res['statusText'] === 'Created')
         {
-            navigate('/', { replace: false });
+            const postData = await post_res['data'];
+            navigate(`/post/${postData._id}`, { replace: true });
         }
         else
         {
