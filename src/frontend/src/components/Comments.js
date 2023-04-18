@@ -19,10 +19,16 @@ const Comments = ({id}) =>
             if(commentsData['statusText'] === 'OK')
             {
                 const commentsList = await commentsData['data'];
-                setComments(commentsList);
+                if(commentsList.length === 0)
+                {
+                    setNoComments('No Comments');
+                }
+                else
+                {
+                    setComments(commentsList);
+                }
                 setIsPending(false);
                 setApiError(null);
-                setNoComments(null);
             }
             else if(commentsData['statusText'] === 'Accepted')
             {

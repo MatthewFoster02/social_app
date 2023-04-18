@@ -111,8 +111,8 @@ const ShowPost = () =>
                     )
                 }
             </div>
-            <AddComment />
-            <Comments id={{'id': id}}/>
+            <AddComment id={{'id': id}} />
+            <Comments id={{'id': id}} />
         </div>
     );
 }

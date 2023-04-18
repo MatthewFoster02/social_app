@@ -35,6 +35,7 @@ const HomeHeader = () =>
                 'likes': 0,
                 'author_profile_pic': auth.profile_pic,
                 'author_username': auth.username,
+                'comment': false
             }, auth.token);
         if(post_res['statusText'] === 'Created')
         {
