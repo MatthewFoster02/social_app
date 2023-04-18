@@ -1,0 +1,18 @@
+.wrapperAC {
+    padding: 1rem 2rem;
+}
+
+.comment-submit {
+    border: none;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    font-size: 1.25rem;
+    padding: 0.5rem 1rem;
+    border-radius: 100vw;
+}
+
+.comment-submit:hover {
+    cursor: pointer;
+    background-color: lightblue;
+}

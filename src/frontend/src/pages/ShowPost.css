@@ -1,0 +1,46 @@
+.wrapperSP {
+    color: white;
+    padding-block: 1rem;
+}
+
+.postUsername {
+    padding-inline: 2rem;
+    font-weight: bolder;
+    font-size: 2.5rem;
+}
+
+.post-container {
+    display: grid;
+    gap: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid #707070;
+    border-bottom: 1px solid #707070;
+    padding-bottom: 1rem;
+    padding-inline: 2rem;
+}
+
+.post-main {
+    display: grid;
+    gap: 1rem;
+    align-items: center;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #707070;
+}
+
+.post-profile-picture {
+    height: 6rem;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.post-stats {
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 1rem;
+}
+
+.post-stats-left {
+    display: flex;
+    gap: 1rem;
+}

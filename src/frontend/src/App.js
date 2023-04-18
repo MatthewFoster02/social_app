@@ -7,6 +7,7 @@ import Register from "./pages/Register.js";
 import Profile from "./pages/Profile.js";
 import NotFound from "./pages/NotFound.js";
 import UpdateProfile from './pages/UpdateProfile.js';
+import ShowPost from './pages/ShowPost.js';
 
 
 function App()
@@ -19,6 +20,7 @@ function App()
 				<Route path="register" element={<Register />} />
 				<Route path="profile/:id" element={<Profile />} />
 				<Route path="profile/update" element={<UpdateProfile />} />
+				<Route path="post/:id" element={<ShowPost />} />
 				<Route path="*" element={<NotFound/>} />
 			</Route>
 		</Routes>
