@@ -14,7 +14,9 @@ const Post = ({post}) =>
     const { auth, setAuth } = useAuth();
     const { author, comments, content, date_posted, likes, _id, author_profile_pic, author_username, likers } = post;
     const [likeVal, setLikeVal] = useState(likes);
-    const [postLiked, setPostLiked] = useState(likers.includes(auth.id));
+    const [postLiked, setPostLiked] = useState(false);
+    if(likers != null)
+        if(likers.includes(auth.id)) setPostLiked(true);
     const [heartImage, setHeartImage] = useState(whiteHeart);
 
     const addLike = (e) =>

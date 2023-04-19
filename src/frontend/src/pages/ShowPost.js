@@ -40,7 +40,7 @@ const ShowPost = () =>
 
                 setPost(postData);
                 setLikeVal(postData.likes);
-                if (postData.likers)
+                if(postData.likers != null)
                     if(postData.likers.includes(auth.id)) setPostLiked(true);
                 setIsPending(false);
                 setApiError(null);
