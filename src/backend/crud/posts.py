@@ -50,6 +50,14 @@ async def increaseLikes(request:Request, id:str):
     updated_post = await request.app.mongodb['posts'].find_one({'_id': id})
     return PostBase(**updated_post) if updated_post is not None else None
 
+async def decreaseLikes(request:Request, id:str):
+    await request.app.mongodb['posts'].update_one(
+        {'_id': id},
+        {'$inc': {'likes': -1}}
+    )
+    updated_post = await request.app.mongodb['posts'].find_one({'_id': id})
+    return PostBase(**updated_post) if updated_post is not None else None
+
 async def createComment(request:Request, newPost:PostBase, id:str):
     newComment = await createPost(request, newPost)
 

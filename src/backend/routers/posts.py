@@ -68,6 +68,15 @@ async def increase_like_count(request:Request, id:str):
     
     raise HTTPException(status_code=404, detail=f'Post with id: {id} not found')
 
+@router.patch('/unlike/{id}', response_description='Increase like count on post matching ID')
+async def decrease_like_count(request:Request, id:str):
+    post = await posts.decreaseLikes(request, id)
+
+    if post is not None:
+        return post
+    
+    raise HTTPException(status_code=404, detail=f'Post with id: {id} not found')
+
 @router.post('/comment/{id}', response_description='Create comment on post with ID')
 async def create_comment(request:Request, id:str, comment:PostBase=Body(...), userID=Depends(authorization.authWrapper)):
     if not comment.author == userID:

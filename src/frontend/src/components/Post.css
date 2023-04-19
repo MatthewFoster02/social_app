@@ -60,6 +60,17 @@
 
 .like-img,
 .comment-img {
+    height: 1.2rem;
+    width: 1.2rem;
+}
+
+.like-btn {
+    border: none;
+    background-color: black;
     height: 1rem;
-    aspect-ratio: 1;
+    padding: 0;
+}
+
+.like-btn:hover {
+    cursor: pointer;
 }

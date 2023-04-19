@@ -36,6 +36,11 @@ class PostsAPIConnection
         return axiosConfig.patch(baseURL + `/like/${id}`);
     }
 
+    unlike(id)
+    {
+        return axiosConfig.patch(baseURL + `/unlike/${id}`);
+    }
+
     comment(id, body, token)
     {
         return axiosConfig.post(baseURL + `/comment/${id}`, body, {headers: {Authorization: `Bearer ${token}`}});

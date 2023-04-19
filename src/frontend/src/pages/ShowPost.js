@@ -2,7 +2,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import './ShowPost.css';
-import like from '../images/like-white.png';
+import whiteHeart from '../images/like-white.png';
+import redHeartHollow from '../images/like-red-hollow.png';
+import redHeartFilled from '../images/like-red-filled.png';
 import comment from '../images/comment-white.png';
 import postsAPI from '../apiHandlers/posts.js';
 import AddComment from '../components/AddComment.js';
@@ -17,6 +19,8 @@ const ShowPost = () =>
     const [isPending, setIsPending] = useState(true);
     const [apiError, setApiError] = useState();
     const [datePosted, setDatePosted] = useState('');
+    const [likeVal, setLikeVal] = useState(0);
+    const [postLiked, setPostLiked] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() =>
@@ -35,6 +39,7 @@ const ShowPost = () =>
                 setDatePosted(`${day}/${month}/${year}`);
 
                 setPost(postData);
+                setLikeVal(postData.likes);
                 setIsPending(false);
                 setApiError(null);
             }
@@ -66,6 +71,22 @@ const ShowPost = () =>
         }
     }
 
+    const [heartImage, setHeartImage] = useState(whiteHeart);
+
+    const addLike = () =>
+    {
+        postsAPI.like(id);
+        setLikeVal(likeVal + 1);
+        setPostLiked(true);
+    }
+
+    const removeLike = () =>
+    {
+        postsAPI.unlike(id);
+        setLikeVal(likeVal - 1);
+        setPostLiked(false);
+    }
+
     return (
         <div className='wrapperSP'>
             {
@@ -88,10 +109,33 @@ const ShowPost = () =>
                 </div>
                 <div className="post-stats">
                     <div className="post-stats-left">
-                        <div className="likes"> 
-                            <img src={like} className="like-img" />
-                            <p>{post.likes}</p>
-                        </div>
+                        {
+                            !postLiked ? <div className="likes"> 
+                                <button className="like-btn" onClick={addLike}>
+                                <img
+                                    src={heartImage}
+                                    alt="Heart"
+                                    width="50"
+                                    height="50"
+                                    className="like-img"
+                                    onMouseOver={() => setHeartImage(redHeartHollow)}
+                                    onMouseOut={() => setHeartImage(whiteHeart)}
+                                />
+                                </button>
+                                <p>{likeVal}</p>
+                            </div> : <div className="likes"> 
+                                <button className="like-btn" onClick={removeLike}>
+                                <img
+                                    src={redHeartFilled}
+                                    alt="Heart"
+                                    width="50"
+                                    height="50"
+                                    className="like-img"
+                                />
+                                </button>
+                                <p>{likeVal}</p>
+                            </div>
+                        }
                         <div className="comments">
                             <img src={comment} className="comment-img" />
                             <p>{
