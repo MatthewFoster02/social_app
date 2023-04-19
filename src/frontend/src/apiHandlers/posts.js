@@ -31,14 +31,15 @@ class PostsAPIConnection
         return axiosConfig.delete(baseURL + `/${id}?comment=${comment}`, {headers: {Authorization: `Bearer ${token}`}});
     }
 
-    like(id)
+    like(id, body)
     {
-        return axiosConfig.patch(baseURL + `/like/${id}`);
+        console.log(body);
+        return axiosConfig.patch(baseURL + `/like/${id}`, body);
     }
 
-    unlike(id)
+    unlike(id, body)
     {
-        return axiosConfig.patch(baseURL + `/unlike/${id}`);
+        return axiosConfig.patch(baseURL + `/unlike/${id}`, body);
     }
 
     comment(id, body, token)

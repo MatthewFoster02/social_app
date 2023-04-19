@@ -46,7 +46,6 @@ async def login(request:Request, loginUser:LoginBase=Body(...)):
 
 @router.get('/me', response_description='Logged in user\'s data')
 async def me(request:Request, userID=Depends(authorization.authWrapper)) -> JSONResponse:
-    print('HERE: '+userID)
     currentUser = await request.app.mongodb['users'].find_one({'_id': userID})
     result = CurrentUser(**currentUser).dict()
     result['id'] = userID

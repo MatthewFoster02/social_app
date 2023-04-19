@@ -13,6 +13,10 @@ class PostBase(MongoBaseModel):
     author_profile_pic:str = Field(...)
     author_username:str = Field(...)
     comment:bool = Field(...)
+    likers:Optional[List[str]] = None
 
 class GptBase(BaseModel):
     prompt:str = Field(...)
+
+class LikeID(BaseModel):
+    userID:str = Field(...)

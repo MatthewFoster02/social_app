@@ -40,6 +40,8 @@ const ShowPost = () =>
 
                 setPost(postData);
                 setLikeVal(postData.likes);
+                if (postData.likers)
+                    if(postData.likers.includes(auth.id)) setPostLiked(true);
                 setIsPending(false);
                 setApiError(null);
             }
@@ -75,16 +77,22 @@ const ShowPost = () =>
 
     const addLike = () =>
     {
-        postsAPI.like(id);
-        setLikeVal(likeVal + 1);
-        setPostLiked(true);
+        if(auth.id)
+        {
+            postsAPI.like(id, {'userID': auth.id});
+            setLikeVal(likeVal + 1);
+            setPostLiked(true);
+        }
     }
 
     const removeLike = () =>
     {
-        postsAPI.unlike(id);
-        setLikeVal(likeVal - 1);
-        setPostLiked(false);
+        if(auth.id)
+        {
+            postsAPI.unlike(id, {'userID': auth.id});
+            setLikeVal(likeVal - 1);
+            setPostLiked(false);
+        }
     }
 
     return (

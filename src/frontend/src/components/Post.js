@@ -11,28 +11,32 @@ import useAuth from "../hooks/useAuth.js";
 
 const Post = ({post}) => 
 {
-    const { author, comments, content, date_posted, likes, _id, author_profile_pic, author_username } = post;
-    const [likeVal, setLikeVal] = useState(likes);
-    const [postLiked, setPostLiked] = useState(false);
-    const [heartImage, setHeartImage] = useState(whiteHeart);
     const { auth, setAuth } = useAuth();
-
-    //if(auth.likers.contains(auth.id)) setPostLiked(true);
+    const { author, comments, content, date_posted, likes, _id, author_profile_pic, author_username, likers } = post;
+    const [likeVal, setLikeVal] = useState(likes);
+    const [postLiked, setPostLiked] = useState(likers.includes(auth.id));
+    const [heartImage, setHeartImage] = useState(whiteHeart);
 
     const addLike = (e) =>
     {
         e.preventDefault();
-        postsAPI.like(_id);
-        setLikeVal(likeVal + 1);
-        setPostLiked(true);
+        if(auth.id)
+        {
+            postsAPI.like(_id, {'userID': auth.id});
+            setLikeVal(likeVal + 1);
+            setPostLiked(true);
+        }
     }
 
     const removeLike = (e) =>
     {
         e.preventDefault();
-        postsAPI.unlike(_id);
-        setLikeVal(likeVal - 1);
-        setPostLiked(false);
+        if(auth.id)
+        {
+            postsAPI.unlike(_id, {'userID': auth.id});
+            setLikeVal(likeVal - 1);
+            setPostLiked(false);
+        }
     }
 
     return (

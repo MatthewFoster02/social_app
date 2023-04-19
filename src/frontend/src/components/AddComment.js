@@ -34,7 +34,6 @@ const AddComment = ({id}) =>
             'author_username': auth.username,
             'comment': true
         }, auth.token);
-        console.log(comment_res);
         if(comment_res['statusText'] === 'Created')
         {
             navigate('/', { replace: false });

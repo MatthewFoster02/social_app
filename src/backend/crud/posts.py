@@ -42,18 +42,28 @@ async def deletePost(request:Request, postID:str):
     deleted = await request.app.mongodb['posts'].delete_one({'_id': postID})
     return deleted.deleted_count == 1
 
-async def increaseLikes(request:Request, id:str):
+async def increaseLikes(request:Request, id:str, userID:str):
+    post = await request.app.mongodb['posts'].find_one({'_id': id})
+    likers = []
+    if post['likers'] is not None:
+        likers = post['likers']
+    likers.append(userID)
+
     await request.app.mongodb['posts'].update_one(
         {'_id': id},
-        {'$inc': {'likes': 1}}
+        {'$inc': {'likes': 1}, '$set': {'likers': likers}}
     )
     updated_post = await request.app.mongodb['posts'].find_one({'_id': id})
     return PostBase(**updated_post) if updated_post is not None else None
 
-async def decreaseLikes(request:Request, id:str):
+async def decreaseLikes(request:Request, id:str, userID:str):
+    post = await request.app.mongodb['posts'].find_one({'_id': id})
+    likers = post['likers']
+    likers.remove(userID)
+
     await request.app.mongodb['posts'].update_one(
         {'_id': id},
-        {'$inc': {'likes': -1}}
+        {'$inc': {'likes': -1}, '$set': {'likers': likers}}
     )
     updated_post = await request.app.mongodb['posts'].find_one({'_id': id})
     return PostBase(**updated_post) if updated_post is not None else None

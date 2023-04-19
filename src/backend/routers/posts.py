@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 
 import gpt
 from crud import posts, users
-from models.posts import PostBase, GptBase
+from models.posts import PostBase, GptBase, LikeID
 from authentication import Authorization
 
 router = APIRouter()
@@ -60,17 +60,17 @@ async def delete_post(request:Request, id:str, userID=Depends(authorization.auth
     raise HTTPException(status_code=404, detail=f'Post with id: {id} not found')
 
 @router.patch('/like/{id}', response_description='Increase like count on post matching ID')
-async def increase_like_count(request:Request, id:str):
-    post = await posts.increaseLikes(request, id)
+async def increase_like_count(request:Request, id:str, userID:LikeID=Body(...)):
+    post = await posts.increaseLikes(request, id, userID.userID)
 
     if post is not None:
         return post
     
     raise HTTPException(status_code=404, detail=f'Post with id: {id} not found')
 
-@router.patch('/unlike/{id}', response_description='Increase like count on post matching ID')
-async def decrease_like_count(request:Request, id:str):
-    post = await posts.decreaseLikes(request, id)
+@router.patch('/unlike/{id}', response_description='Decrease like count on post matching ID')
+async def decrease_like_count(request:Request, id:str, userID:LikeID=Body(...)):
+    post = await posts.decreaseLikes(request, id, userID.userID)
 
     if post is not None:
         return post
