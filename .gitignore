@@ -129,7 +129,6 @@ dmypy.json
 .pyre/
 
 # Custom ignorants
-src/backend/image_handling
 src/backend/default_profile_pic.jfif
 planning/backend/extra_features.txt
 /.vscode
