@@ -8,7 +8,7 @@ import postsAPI from '../apiHandlers/posts.js';
 
 const AddComment = ({id}) => 
 {
-    const { auth, setAuth } = useAuth();
+    const { auth } = useAuth();
     const [apiError, setApiError] = useState();
     let navigate = useNavigate();
 

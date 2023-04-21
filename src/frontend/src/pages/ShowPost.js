@@ -40,8 +40,26 @@ const ShowPost = () =>
 
                 setPost(postData);
                 setLikeVal(postData.likes);
-                if(postData.likers != null)
-                    if(postData.likers.includes(auth.id)) setPostLiked(true);
+                if(postData.likers == null || postData.likers.length == 0)
+                {
+                    console.log('Null or empty list...');
+                    setPostLiked(false);
+                } 
+                else
+                {
+                    console.log(`Likers IDs: ${postData.likers}, My ID: ${auth.id}: ${postData.likers.includes(auth.id)}`)
+                    if(postData.likers.includes(auth.id))
+                    {
+                        console.log('liked the post man...')
+                        setPostLiked(true);
+                    }
+                    else
+                    {
+                        console.log('others may have liked this, but I have not...')
+                        setPostLiked(false);
+                    }
+                }
+
                 setIsPending(false);
                 setApiError(null);
             }
@@ -54,7 +72,7 @@ const ShowPost = () =>
             }
         }
         fetchPost();
-    }, [id]);
+    }, [id, auth.id]);
 
     const deletePost = async () =>
     {

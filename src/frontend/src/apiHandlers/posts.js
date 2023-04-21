@@ -33,7 +33,6 @@ class PostsAPIConnection
 
     like(id, body)
     {
-        console.log(body);
         return axiosConfig.patch(baseURL + `/like/${id}`, body);
     }
 
