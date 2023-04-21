@@ -37,9 +37,9 @@ def test_get_user_success():
             'username': 'Maatty',
             'email': 'mattfoster02@outlook.com',
             'password': '$2b$12$X.LIahiJMJ9X0rl8nQpu6etUyrqMO0zLDYbG.UlKbMTMwrJAfyyK6',
-            'bio': 'It is me Mario',
-            'birthday': 30062002,
-            'profile_pic': 'http://res.cloudinary.com/dphekriyz/image/upload/v1678237366/profile_pics/e1ydvozojlzhdzr353oj.jpg'
+            'bio': 'Hi there! My BIO!',
+            'birthday': 1025388000000,
+            'profile_pic': 'http://res.cloudinary.com/dphekriyz/image/upload/v1681894373/profile_pics/faoavl7rj8aan0vxhppx.jpg'
         } # Checking other fields
 
 def test_get_user_404():
@@ -85,15 +85,15 @@ def test_login_success():
         assert response.status_code == 200
         user = response.json()['user']
         assert user == {
-            "_id": "6408c06a8fde09a588c963ce",
-            "firstname": "Matthew",
-            "lastname": "Foster",
-            "username": "Maatty",
-            "email": "mattfoster02@outlook.com",
-            "password": "$2b$12$X.LIahiJMJ9X0rl8nQpu6etUyrqMO0zLDYbG.UlKbMTMwrJAfyyK6",
-            "profile_pic": "http://res.cloudinary.com/dphekriyz/image/upload/v1678237366/profile_pics/e1ydvozojlzhdzr353oj.jpg",
-            "bio": "It is me Mario",
-            "birthday": 30062002
+            '_id': '6408c06a8fde09a588c963ce',
+            'firstname': 'Matthew',
+            'lastname': 'Foster',
+            'username': 'Maatty',
+            'email': 'mattfoster02@outlook.com',
+            'password': '$2b$12$X.LIahiJMJ9X0rl8nQpu6etUyrqMO0zLDYbG.UlKbMTMwrJAfyyK6',
+            'bio': 'Hi there! My BIO!',
+            'birthday': 1025388000000,
+            'profile_pic': 'http://res.cloudinary.com/dphekriyz/image/upload/v1681894373/profile_pics/faoavl7rj8aan0vxhppx.jpg'
         }
 
 # Testing get user by query
@@ -116,7 +116,7 @@ def test_query_success():
             'username': 'Maatty',
             'email': 'mattfoster02@outlook.com',
             'password': '$2b$12$X.LIahiJMJ9X0rl8nQpu6etUyrqMO0zLDYbG.UlKbMTMwrJAfyyK6',
-            'bio': 'It is me Mario',
-            'birthday': 30062002,
-            'profile_pic': 'http://res.cloudinary.com/dphekriyz/image/upload/v1678237366/profile_pics/e1ydvozojlzhdzr353oj.jpg'
+            'bio': 'Hi there! My BIO!',
+            'birthday': 1025388000000,
+            'profile_pic': 'http://res.cloudinary.com/dphekriyz/image/upload/v1681894373/profile_pics/faoavl7rj8aan0vxhppx.jpg'
         }
