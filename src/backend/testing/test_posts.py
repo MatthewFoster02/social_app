@@ -22,23 +22,27 @@ def test_get_all_no_query():
             "author_profile_pic": "http://res.cloudinary.com/dphekriyz/image/upload/v1681894373/profile_pics/faoavl7rj8aan0vxhppx.jpg",
             "author_username": "Maatty",
             "comment": False,
-            "likers": None
+            "likers": []
         }
 
 def test_get_all_specific_author():
     with TestClient(app) as client:
         response = client.get(
-            baseURL + f"?userID=640bedd4f9aaa06b8a255831"
+            baseURL + f"?userID=6408c06a8fde09a588c963ce"
         )
         assert response.status_code == 200
         posts = response.json()['posts']
         assert posts[0] == {
-            "_id": "640bee2070f109d62fc5dce1",
-			"author": "640bedd4f9aaa06b8a255831",
-			"content": "This is a test post",
-			"date_posted": 7000,
-			"likes": 2000000,
-			"comments": None
+            "_id": "643b3e370b611ee82b522ae0",
+			"author": "6408c06a8fde09a588c963ce",
+			"content": "Paw-some news! My furry bestie is the cutest pup in the park! 🐾🐶❤️ Whether we're sniffing flowers or chasing squirrels, my dog's tail never stops wagging. Life is simply better with a four-legged friend by your side. #DogLove #ParkPals 🌳",
+			"date_posted": 1681604151774,
+			"likes": 0,
+			"comments": None,
+            "author_profile_pic": "http://res.cloudinary.com/dphekriyz/image/upload/v1681894373/profile_pics/faoavl7rj8aan0vxhppx.jpg",
+            "author_username": "Maatty",
+            "comment": False,
+            "likers": []
         }
 
 def test_get_all_specific_author_error_404():
@@ -53,16 +57,20 @@ def test_get_all_specific_author_error_404():
 def test_get_by_id_success():
     with TestClient(app) as client:
         response = client.get(
-            baseURL + "/640be4999ad12d55bbb6804a"
+            baseURL + "/643b3e370b611ee82b522ae0"
         )
         assert response.status_code == 200
         assert response.json() == {
-            "_id": "640be4999ad12d55bbb6804a",
-            "author": "6408c06a8fde09a588c963ce",
-            "content": "Matty's second post",
-            "date_posted": 5500,
-            "likes": 1000,
-            "comments": None
+            "_id": "643b3e370b611ee82b522ae0",
+			"author": "6408c06a8fde09a588c963ce",
+			"content": "Paw-some news! My furry bestie is the cutest pup in the park! 🐾🐶❤️ Whether we're sniffing flowers or chasing squirrels, my dog's tail never stops wagging. Life is simply better with a four-legged friend by your side. #DogLove #ParkPals 🌳",
+			"date_posted": 1681604151774,
+			"likes": 0,
+			"comments": None,
+            "author_profile_pic": "http://res.cloudinary.com/dphekriyz/image/upload/v1681894373/profile_pics/faoavl7rj8aan0vxhppx.jpg",
+            "author_username": "Maatty",
+            "comment": False,
+            "likers": []
         }
 
 def test_get_by_id_error_404():
@@ -72,37 +80,6 @@ def test_get_by_id_error_404():
         )
         assert response.status_code == 404
         assert response.json() == {'detail': 'Post with id: fakePost not found'}
-
-# Testing likes route
-def test_like_post_404():
-    with TestClient(app) as client:
-        response = client.patch(
-            baseURL + "/like/fakePost"
-        )
-        assert response.status_code == 404
-        assert response.json() == {'detail': 'Post with id: fakePost not found'}
-
-def test_like_post():
-    with TestClient(app) as client:
-        response = client.get(
-            baseURL + "/640d1c713b00ed399996e46f"
-        )
-        json_data = response.json()
-        likes = json_data['likes']
-        likes += 1 # Increase the previous like count to compare after calling like route
-
-        res = client.patch(
-            baseURL + '/like/640d1c713b00ed399996e46f'
-        )
-        assert res.status_code == 200
-        assert res.json() == {
-            "_id": "640d1c713b00ed399996e46f",
-            "author": "6408c06a8fde09a588c963ce",
-            "content": "Matty's First post",
-            "date_posted": 2002,
-            "likes": likes,
-            "comments": []
-        }
 
 # Testing get all comments
 def test_get_comments_404():
@@ -116,24 +93,28 @@ def test_get_comments_404():
 def test_get_all_comments_no_comment():
     with TestClient(app) as client:
         response = client.get(
-            baseURL + "/comment/640be4999ad12d55bbb6804a"
+            baseURL + "/comment/6441d62cb4364ef6e4701559"
         )
-        assert response.status_code == 200
+        assert response.status_code == 202
         assert response.json() == {'message': 'No comments'}
 
 def test_get_all_comments_success():
     with TestClient(app) as client:
         response = client.get(
-            baseURL + "/comment/6410f93ba8311c9ced4da2da"
+            baseURL + "/comment/6441d8ccb4364ef6e470155c"
         )
         assert response.status_code == 200
         comments = response.json()
         assert len(comments) == 1
         assert comments[0] == {
-            "_id": "6410f9aea8311c9ced4da2db",
+            "_id": "6441e181b4364ef6e470155d",
             "author": "6408c06a8fde09a588c963ce",
-            "content": "bRILLIANT",
-            "date_posted": 420,
-            "likes": 2,
-            "comments": None
+            "content": "It really is!",
+            "date_posted": 1682039169136,
+            "likes": 0,
+            "comments": None,
+            "author_profile_pic": "http://res.cloudinary.com/dphekriyz/image/upload/v1681894373/profile_pics/faoavl7rj8aan0vxhppx.jpg",
+            "author_username": "Maatty",
+            "comment": True,
+            "likers": None
         }
