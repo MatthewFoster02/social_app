@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 
 import useAuth from '../hooks/useAuth.js';
 import usersAPI from '../apiHandlers/users.js';
-import './Login.css';
+import '../style/Login.css';
 
 const Login = () =>
 {

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import usersAPI from "../apiHandlers/users.js";
 import useAuth from "../hooks/useAuth.js";
-import './Profile.css';
+import '../style/Profile.css';
 import DisplayPosts from "../components/DisplayPosts.js";
 
 const Profile = () => 

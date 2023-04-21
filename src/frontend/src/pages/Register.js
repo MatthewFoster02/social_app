@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import usersAPI from '../apiHandlers/users.js';
-import './Register.css';
 
 const Register = () =>
 {

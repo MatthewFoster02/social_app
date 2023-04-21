@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-import './UpdateProfile.css';
+import '../style/UpdateProfile.css';
 import usersAPI from '../apiHandlers/users.js';
 import postsAPI from '../apiHandlers/posts.js';
 import useAuth from '../hooks/useAuth.js';

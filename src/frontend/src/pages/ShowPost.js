@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import './ShowPost.css';
+import '../style/ShowPost.css';
 import whiteHeart from '../images/like-white.png';
 import redHeartHollow from '../images/like-red-hollow.png';
 import redHeartFilled from '../images/like-red-filled.png';
