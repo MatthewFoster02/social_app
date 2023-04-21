@@ -11,7 +11,7 @@ The frontend needs to interact with the backend to retrieve user/post informatio
 
 ### Design files from Adobe Xd
 
-![HomePageLoggedOut]()
-![HomePageLoggedIn]()
-![ProfilePage]()
-![PostDisplay]()
+![HomePageLoggedOut](https://github.com/MatthewFoster02/social_app/blob/main/planning/frontend/Web%201920%20%E2%80%93%201.png)
+![HomePageLoggedIn](https://github.com/MatthewFoster02/social_app/blob/main/planning/frontend/Web%201920%20%E2%80%93%202.png)
+![ProfilePage](https://github.com/MatthewFoster02/social_app/blob/main/planning/frontend/Web%201920%20%E2%80%93%203.png)
+![PostDisplay](https://github.com/MatthewFoster02/social_app/blob/main/planning/frontend/Web%201920%20%E2%80%93%204.png)
