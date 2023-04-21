@@ -18,7 +18,6 @@ const AddComment = ({id}) =>
 
     const addComment = async (content) =>
     {
-        console.log('Comment: '+content.comment);
         if(!auth?.username)
         {
             setApiError('Need to be logged in to add a comment...');

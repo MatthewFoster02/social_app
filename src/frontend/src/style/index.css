@@ -23,3 +23,11 @@ main {
 p {
   margin: 0;
 }
+
+.err404 {
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
