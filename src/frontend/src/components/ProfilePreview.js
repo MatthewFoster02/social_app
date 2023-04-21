@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import './ProfilePreview.css';
+import '../style/ProfilePreview.css';
 
 const ProfilePreview = ({profile}) => 
 {

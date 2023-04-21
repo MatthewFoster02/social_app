@@ -2,12 +2,12 @@ import { Outlet } from "react-router-dom";
 
 import LeftSidebar from "./LeftSidebar.js";
 import RightSidebar from "./RightSidebar.js";
-import "./Layout.css";
+import "../style/Layout.css";
 
 const Layout = ({children}) =>
 {
     return (
-        <div className="layout">
+        <div className="wrapperLayout">
             <LeftSidebar />
             <main>
                 <Outlet />

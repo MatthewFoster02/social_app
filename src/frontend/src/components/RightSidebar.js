@@ -1,6 +1,6 @@
 import Search from "./Search.js";
 import About from "./About.js";
-import './RightSidebar.css';
+import '../style/RightSidebar.css';
 
 const RightSidebar = () => 
 {

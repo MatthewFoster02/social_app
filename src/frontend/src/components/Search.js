@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import users from "../apiHandlers/users.js";
-import './Search.css';
+import '../style/Search.css';
 import search from '../images/search-gray.svg';
 import ProfilePreview from "./ProfilePreview.js";
 
@@ -42,6 +42,7 @@ const Search = () =>
         const searchValue = watch('search');
         if (searchValue === '') {
             setProfiles([]);
+            setApiError(null);
         }
     }, [watch('search')]);
 

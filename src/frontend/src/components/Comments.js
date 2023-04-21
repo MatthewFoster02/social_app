@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import './Comments.css';
+import '../style/Comments.css';
 import postsAPI from '../apiHandlers/posts.js';
 import Post from './Post.js';
 

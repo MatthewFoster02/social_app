@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 
 import useAuth from '../hooks/useAuth.js';
 import postsAPI from "../apiHandlers/posts.js";
-import './HomeHeader.css';
+import '../style/HomeHeader.css';
 
 const HomeHeader = () => 
 {

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 
-import './AddComment.css';
+import '../style/AddComment.css';
 import useAuth from '../hooks/useAuth.js';
 import postsAPI from '../apiHandlers/posts.js';
 

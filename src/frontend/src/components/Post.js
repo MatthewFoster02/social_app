@@ -6,7 +6,7 @@ import redHeartHollow from '../images/like-red-hollow.png';
 import redHeartFilled from '../images/like-red-filled.png';
 import comment from '../images/comment-white.png';
 import postsAPI from '../apiHandlers/posts.js';
-import './Post.css';
+import '../style/Post.css';
 import useAuth from "../hooks/useAuth.js";
 
 const Post = ({post}) => 

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import postsAPI from '../apiHandlers/posts.js';
 import Post from "./Post.js";
-import './DisplayPosts.css';
+import '../style/DisplayPosts.css';
 
 const DisplayPosts = ({props}) => 
 {
