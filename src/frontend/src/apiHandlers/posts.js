@@ -61,4 +61,5 @@ class PostsAPIConnection
         return axiosConfig.patch(baseURL + '/update-pic', body);
     }
 }
-export default new PostsAPIConnection();
+const postsAPIConnection = new PostsAPIConnection();
+export default postsAPIConnection;

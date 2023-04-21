@@ -41,4 +41,5 @@ class UsersAPIConnection
         return axiosConfig.get(baseURL + '/me', {headers: {Authorization: `Bearer ${token}`}});
     }
 }
-export default new UsersAPIConnection();
+const usersAPIConnection = new UsersAPIConnection();
+export default usersAPIConnection;

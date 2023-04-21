@@ -13,7 +13,7 @@ const Search = () =>
     const [isPending, setIsPending] = useState(false);
 
     const {
-        register, handleSubmit, formState: { errors }, watch
+        register, handleSubmit, watch
     } = useForm();
 
     const searchByString = async (query) =>
@@ -37,14 +37,15 @@ const Search = () =>
             setIsPending(false);
         }
     }
-
+    
+    const searchValue = watch('search');
     useEffect(() => {
-        const searchValue = watch('search');
         if (searchValue === '') {
             setProfiles([]);
             setApiError(null);
         }
-    }, [watch('search')]);
+    }, [searchValue, watch]);
+
 
     const onErrors = (errors) => console.error(errors);
 
@@ -65,7 +66,7 @@ const Search = () =>
                         {...register('search', { required: '*Some text required for search'})}
                     />
                     <button className="search">
-                        <img className="mag-glass" src={search} />
+                        <img className="mag-glass" src={search} alt="" />
                     </button>
                 </div>
             </form>

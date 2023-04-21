@@ -16,7 +16,7 @@ const Register = () =>
     const onFormSubmit = async (data) =>
     {
         const res = await usersAPI.register(data);
-        if(res['statusText'] == 'Created')
+        if(res['statusText'] === 'Created')
         {
             const userDetails = await res['data'];
             setApiError(null);

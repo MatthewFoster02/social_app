@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
 
 import postsAPI from '../apiHandlers/posts.js';
 import Post from "./Post.js";
@@ -7,7 +6,6 @@ import '../style/DisplayPosts.css';
 
 const DisplayPosts = ({props}) => 
 {
-    let navigate = useNavigate();
     const [posts, setPosts] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);

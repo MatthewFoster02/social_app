@@ -13,7 +13,7 @@ import useAuth from "../hooks/useAuth.js";
 
 const ShowPost = () => 
 {
-    const { auth, setAuth } = useAuth();
+    const { auth } = useAuth();
     const { id } = useParams();
     const [post, setPost] = useState({});
     const [isPending, setIsPending] = useState(true);
@@ -40,7 +40,7 @@ const ShowPost = () =>
 
                 setPost(postData);
                 setLikeVal(postData.likes);
-                if(postData.likers == null || postData.likers.length == 0) setPostLiked(false);
+                if(postData.likers == null || postData.likers.length === 0) setPostLiked(false);
                 else
                 {
                     if(postData.likers.includes(auth.id)) setPostLiked(true);
@@ -150,7 +150,7 @@ const ShowPost = () =>
                             </div>
                         }
                         <div className="comments">
-                            <img src={comment} className="comment-img" />
+                            <img src={comment} className="comment-img" alt="" />
                             <p>{
                                 post.comments ? post.comments.length : 0
                             }</p>

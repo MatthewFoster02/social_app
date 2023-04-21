@@ -24,15 +24,15 @@ const LeftSidebar = () =>
         <div className="wrapper">
             <div className="links">
                 <Link className="link-txt" to='/'>
-                    <img src={homeImg} className="home-img" />
+                    <img src={homeImg} className="home-img" alt="" />
                     Home
                 </Link>
                 {
                     auth?.id ? <Link className="link-txt" to={`/profile/${auth.id}`}>
-                        <img src={profileImg} className="profile-img" />
+                        <img src={profileImg} className="profile-img" alt="" />
                         Profile
                     </Link> : <Link className="link-txt" to={'/login'}>
-                        <img src={profileImg} className="profile-img" />
+                        <img src={profileImg} className="profile-img" alt="" />
                         Profile
                     </Link>
                 }

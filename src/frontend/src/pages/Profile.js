@@ -8,7 +8,7 @@ import DisplayPosts from "../components/DisplayPosts.js";
 
 const Profile = () => 
 {
-    const { auth, setAuth } = useAuth();
+    const { auth } = useAuth();
     const { id } = useParams();
     const [user, setUser] = useState({});
     const [isPending, setIsPending] = useState(true);

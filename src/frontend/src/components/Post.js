@@ -11,8 +11,8 @@ import useAuth from "../hooks/useAuth.js";
 
 const Post = ({post}) => 
 {
-    const { auth, setAuth } = useAuth();
-    const { author, comments, content, date_posted, likes, _id, author_profile_pic, author_username, likers } = post;
+    const { auth } = useAuth();
+    const { author, comments, content, likes, _id, author_profile_pic, author_username, likers } = post;
     const [likeVal, setLikeVal] = useState(likes);
     const [postLiked, setPostLiked] = useState(false);
     const [heartImage, setHeartImage] = useState(whiteHeart);
@@ -21,7 +21,7 @@ const Post = ({post}) =>
     {
         if(likers != null)
             if(likers.includes(auth.id)) setPostLiked(true);
-    }, [auth.id]);
+    }, [auth.id, likers]);
 
     const addLike = (e) =>
     {
@@ -48,7 +48,7 @@ const Post = ({post}) =>
     return (
         <Link to={`/post/${_id}`} className="post-layout">
             <div className="profile-info">
-                <Link to={`/profile/${author}`}><img src={author_profile_pic} className="profile-pic" /></Link>
+                <Link to={`/profile/${author}`}><img src={author_profile_pic} className="profile-pic" alt="" /></Link>
                 <Link to={`/profile/${author}`} className="profile-name">{author_username}</Link>
             </div>
             <p className="post-content">
@@ -83,7 +83,7 @@ const Post = ({post}) =>
                     </div>
                 }
                 <div className="comments">
-                    <img src={comment} className="comment-img" />
+                    <img src={comment} className="comment-img" alt="" />
                     <p>{
                         comments ? comments.length : 0    
                     }</p>

@@ -13,7 +13,7 @@ const AddComment = ({id}) =>
     let navigate = useNavigate();
 
     const {
-        register, handleSubmit, formState: { errors }
+        register, handleSubmit
     } = useForm();
 
     const addComment = async (content) =>

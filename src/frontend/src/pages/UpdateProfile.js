@@ -36,12 +36,7 @@ const UpdateProfile = () =>
         const date = new Date(year, month-1, day);
         const birthday = date.getTime();
         formData.append('birthday', birthday);
-
-        // for (const [key, value] of formData.entries())
-        // {
-        //     console.log(`${key}: ${value}`);
-        // }
-        // send the form data using Axios
+        
         const updated_user = await usersAPI.update(auth.id, formData, auth.token);
         if(updated_user['statusText'] === 'OK')
         {
