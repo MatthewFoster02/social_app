@@ -52,9 +52,10 @@ const UpdateProfile = () =>
             }
             setAuth(userAuth);
             setApiError(null);
-            postsAPI.updatePostPictures({
+            postsAPI.updatePost({
                 'authorID': userDetails['_id'],
-                'profile_pic_url': userDetails['profile_pic']
+                'profile_pic_url': userDetails['profile_pic'],
+                'username': userDetails['username']
             });
             navigate('/', { replace: true });
         }

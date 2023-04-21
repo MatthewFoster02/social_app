@@ -13,12 +13,16 @@ def test_get_all_no_query():
         assert response.status_code == 200
         posts = response.json()['posts']
         assert posts[0] == {
-            "_id": "640be4999ad12d55bbb6804a",
+            "_id": "643b3e370b611ee82b522ae0",
 			"author": "6408c06a8fde09a588c963ce",
-			"content": "Matty's second post",
-			"date_posted": 5500,
-			"likes": 1000,
-			"comments": None
+			"content": "Paw-some news! My furry bestie is the cutest pup in the park! 🐾🐶❤️ Whether we're sniffing flowers or chasing squirrels, my dog's tail never stops wagging. Life is simply better with a four-legged friend by your side. #DogLove #ParkPals 🌳",
+			"date_posted": 1681604151774,
+			"likes": 0,
+			"comments": None,
+            "author_profile_pic": "http://res.cloudinary.com/dphekriyz/image/upload/v1681894373/profile_pics/faoavl7rj8aan0vxhppx.jpg",
+            "author_username": "Maatty",
+            "comment": False,
+            "likers": None
         }
 
 def test_get_all_specific_author():

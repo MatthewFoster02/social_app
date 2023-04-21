@@ -97,5 +97,5 @@ async def get_all_comments(request:Request, id:str):
     raise HTTPException(status_code=404, detail=f'Post with id: {id} not found')
 
 @router.patch('/update-pic', response_description='Update profile pictures of authors')
-async def updatePostPic(request:Request, authorID:str=Body(...), profile_pic_url:str=Body(...)):
-    await posts.updatePostPic(request, authorID, profile_pic_url)
+async def updatePostPic(request:Request, authorID:str=Body(...), profile_pic_url:str=Body(...), username:str=Body(...)):
+    await posts.updatePostPic(request, authorID, profile_pic_url, username)

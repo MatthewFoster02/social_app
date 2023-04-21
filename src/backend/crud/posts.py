@@ -110,7 +110,7 @@ async def removeComment(request:Request, id:str):
         {'_id': parentPost['_id']}, {'$set': {'comments': old_comments}}
     )
 
-async def updatePostPic(request:Request, authorID:str, profile_pic_url:str):
+async def updatePostPic(request:Request, authorID:str, profile_pic_url:str, username:str):
     await request.app.mongodb['posts'].update_many(
-        {'author': authorID}, {'$set': {'author_profile_pic': profile_pic_url}}
+        {'author': authorID}, {'$set': {'author_profile_pic': profile_pic_url, 'author_username': username}}
     )

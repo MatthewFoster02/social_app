@@ -56,7 +56,7 @@ class PostsAPIConnection
         return axiosConfig.post(baseURL + '/gpt', body);
     }
 
-    updatePostPictures(body)
+    updatePost(body)
     {
         return axiosConfig.patch(baseURL + '/update-pic', body);
     }
