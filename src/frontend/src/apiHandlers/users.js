@@ -2,7 +2,7 @@ import axios from 'axios';
 
 let axiosConfig = axios.create({validateStatus: () => true});
 
-const baseURL = 'http://127.0.0.1:8000/users';
+const baseURL = 'https://social-app-backend-t8tx.onrender.com/users';
 
 class UsersAPIConnection
 {
