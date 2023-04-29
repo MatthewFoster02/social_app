@@ -57,6 +57,36 @@ const Post = ({post}) =>
         }
     }, [heartImage]);
 
+    useEffect(() =>
+    {
+        const newTheme = document.querySelector("body").getAttribute('data-theme');
+        if (newTheme === 'dark')
+        {
+            setHeartImage(whiteHeart);
+            setCommentImage(whiteComment);
+        }
+        else
+        {
+            setHeartImage(blackHeart);
+            setCommentImage(blackComment);
+        }
+    }, []);
+
+    const offHoverHeart = () =>
+    {
+        const newTheme = document.querySelector("body").getAttribute('data-theme');
+        if (newTheme === 'dark')
+        {
+            setHeartImage(whiteHeart);
+            setCommentImage(whiteComment);
+        }
+        else
+        {
+            setHeartImage(blackHeart);
+            setCommentImage(blackComment);
+        }
+    }
+
     const addLike = (e) =>
     {
         e.preventDefault();
@@ -99,7 +129,7 @@ const Post = ({post}) =>
                                 height="50"
                                 className="like-img"
                                 onMouseOver={() => setHeartImage(redHeartHollow)}
-                                onMouseOut={() => setHeartImage(whiteHeart)}
+                                onMouseOut={offHoverHeart}
                             />
                         </button>
                         <p>{likeVal}</p>

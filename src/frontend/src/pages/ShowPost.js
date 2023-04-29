@@ -80,8 +80,8 @@ const ShowPost = () =>
         }
     }
 
-    const [heartImage, setHeartImage] = useState(whiteHeart);
-    const [commentImage, setCommentImage] = useState(whiteComment);
+    const [heartImage, setHeartImage] = useState(null);
+    const [commentImage, setCommentImage] = useState(null);
 
     useEffect(() =>
     {
@@ -113,6 +113,36 @@ const ShowPost = () =>
             observer.disconnect();
         }
     }, [heartImage]);
+
+    useEffect(() =>
+    {
+        const newTheme = document.querySelector("body").getAttribute('data-theme');
+        if (newTheme === 'dark')
+        {
+            setHeartImage(whiteHeart);
+            setCommentImage(whiteComment);
+        }
+        else
+        {
+            setHeartImage(blackHeart);
+            setCommentImage(blackComment);
+        }
+    }, []);
+
+    const offHoverHeart = () =>
+    {
+        const newTheme = document.querySelector("body").getAttribute('data-theme');
+        if (newTheme === 'dark')
+        {
+            setHeartImage(whiteHeart);
+            setCommentImage(whiteComment);
+        }
+        else
+        {
+            setHeartImage(blackHeart);
+            setCommentImage(blackComment);
+        }
+    }
 
     const addLike = () =>
     {
@@ -166,7 +196,7 @@ const ShowPost = () =>
                                     height="50"
                                     className="like-img"
                                     onMouseOver={() => setHeartImage(redHeartHollow)}
-                                    onMouseOut={() => setHeartImage(whiteHeart)}
+                                    onMouseOut={offHoverHeart}
                                 />
                                 </button>
                                 <p>{likeVal}</p>
