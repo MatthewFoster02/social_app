@@ -1,11 +1,11 @@
 .contain {
-    color: white;
+    color: var(--textColour);
 }
 
 .wrapper-profile {
-    color: white;
+    color: var(--textColour);
     padding: 1rem 2rem;
-    border-bottom: 1px solid #707070;
+    border-bottom: 1px solid var(--placeholderTextColour);
 }
 
 .profile-pic-update {
@@ -24,8 +24,8 @@
 
 .update-profile-btn {
     text-decoration: none;
-    color: black;
-    background-color: white;
+    background-color: var(--btnBackgroundColour);
+    color: var(--btnTextColour);
     padding: 0.5rem 1rem;
     border-radius: 100vw;
     font-size: 1.5rem;
@@ -33,7 +33,7 @@
 }
 
 .update-profile-btn:hover {
-    background-color: lightblue;
+    background-color: var(--hoverColour);
 }
 
 .user-info {
@@ -48,5 +48,5 @@
 .birthday {
     font-size: 0.75rem;
     font-weight: bold;
-    color: #707070;
+    color: var(--placeholderTextColour);
 }

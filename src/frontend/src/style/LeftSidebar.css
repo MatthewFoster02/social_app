@@ -1,6 +1,6 @@
 .wrapper {
-    background-color: black;
-    border-right: 1px solid #707070;
+    background-color: var(--backgroundColour);
+    border-right: 1px solid var(--placeholderTextColour);
     padding: 8rem 3rem;
 
     display: grid;
@@ -15,7 +15,7 @@
 }
 
 .link-txt {
-    color: white;
+    color: var(--textColour);
     font-size: 2rem;
     font-weight: bold;
     text-decoration: none;
@@ -25,7 +25,7 @@
 }
 
 .link-txt:hover {
-    color: lightblue;
+    color: var(--hoverColour);
 }
 
 .logged-out {
@@ -35,8 +35,8 @@
 
 .link-log {
     text-decoration: none;
-    background-color: white;
-    color: black;
+    background-color: var(--btnBackgroundColour);
+    color: var(--btnTextColour);
     font-size: 1.5rem;
     font-weight: bold;
     padding: 0.5rem 2rem;
@@ -44,7 +44,7 @@
 }
 
 .link-log:hover {
-    background-color: lightblue;
+    background-color: var(--hoverColour);
 }
 
 .logged-in {
@@ -53,8 +53,8 @@
 
 .btn-log {
     border: none;
-    background-color: white;
-    color: black;
+    background-color: var(--btnBackgroundColour);
+    color: var(--btnTextColour);
     font-size: 1.5rem;
     font-weight: bold;
     padding-block: 0.5rem;
@@ -62,10 +62,55 @@
 }
 
 .btn-log:hover {
-    background-color: lightblue;
+    cursor: pointer;
+    background-color: var(--hoverColour);
 }
 
 .profile-img {
     height: 2rem;
     aspect-ratio: 1;
 }
+
+/* Hide the checkbox */
+.toggle-switch input {
+    display: none;
+  }
+  
+  /* Style the slider */
+  .toggle-switch .slider {
+    position: relative;
+    display: inline-block;
+    width: 4rem;
+    height: 2rem;
+    background-color: var(--placeholderTextColour);
+    border-radius: 100vw;
+    transition: background-color 0.2s;
+  }
+
+  .toggle-switch:hover {
+    cursor: pointer;
+  }
+  
+  /* Style the slider when the checkbox is checked */
+  .toggle-switch input:checked + .slider {
+    background-color: var(--hoverColour);
+  }
+  
+  /* Style the circle inside the slider */
+  .toggle-switch .slider::before {
+    position: absolute;
+    content: "";
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    background-color: var(--backgroundColour);
+    top: 0.1rem;
+    left: 0.1rem;
+    transition: transform 0.2s;
+  }
+  
+  /* Move the circle inside the slider when the checkbox is checked */
+  .toggle-switch input:checked + .slider::before {
+    transform: translateX(2rem);
+  }
+  

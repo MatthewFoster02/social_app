@@ -4,8 +4,8 @@
 
 .comment-submit {
     border: none;
-    background-color: white;
-    color: black;
+    background-color: var(--backgroundColour);
+    color: var(--textColour);
     font-weight: bold;
     font-size: 1.25rem;
     padding: 0.5rem 1rem;
@@ -14,5 +14,5 @@
 
 .comment-submit:hover {
     cursor: pointer;
-    background-color: lightblue;
+    background-color: var(--hoverColour);
 }

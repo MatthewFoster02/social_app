@@ -6,6 +6,7 @@ import App from './App.js';
 import reportWebVitals from './reportWebVitals.js';
 import { AuthProvider } from './context/AuthProvider.js';
 
+document.querySelector("body").setAttribute('data-theme', 'dark');
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

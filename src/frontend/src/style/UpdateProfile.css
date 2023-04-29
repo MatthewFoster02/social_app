@@ -1,5 +1,5 @@
 .wrapperUP {
-    color: white;
+    color: var(--textColour);
 }
 
 .birthday-inputs {

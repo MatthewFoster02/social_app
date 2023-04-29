@@ -1,6 +1,6 @@
 .small-gray {
     font-size: 0.75rem;
     font-weight: bold;
-    color: #707070;
+    color: var(--placeholderTextColour);
     padding: 1rem 2rem;
 }

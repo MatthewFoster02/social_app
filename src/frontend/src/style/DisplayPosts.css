@@ -1,5 +1,5 @@
 .wrapperDP {
-    border-top: 1px solid #707070;
+    border-top: 1px solid var(--placeholderTextColour);
     padding: 2rem 3rem;
     display: grid;
     gap: 2rem;
@@ -12,7 +12,7 @@
 
 .current-page {
     font-weight: bolder;
-    color: lightblue;
+    color: var(--hoverColour);
 }
 
 .total-pages {
@@ -27,10 +27,10 @@
 .previous-page,
 .next-page {
     border: none;
-    background-color: white;
+    background-color: var(--btnBackgroundColour);
     font-size: 1rem;
     font-weight: bold;
-    color: black;
+    color: var(--btnTextColour);
     padding: 0.4rem 0.8rem;
     border-radius: 100vw;
 }
@@ -38,5 +38,5 @@
 .previous-page:hover,
 .next-page:hover {
     cursor: pointer;
-    background-color: lightblue;
+    background-color: var(--hoverColour);
 }

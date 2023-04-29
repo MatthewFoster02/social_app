@@ -1,3 +1,31 @@
+[data-theme="dark"] {
+  --backgroundColour: black;
+  --btnBackgroundColour: white;
+  --textColour: white;
+  --btnTextColour: black;
+  --placeholderTextColour: #707070;
+  --hoverColour: lightblue;
+  --postHover: #0f0f10;
+  --deleteBtnBack: white;
+  --deleteBtnText: red;
+  --deleteBtnBackHover: red;
+  --deleteBtnTextHover: white;
+}
+
+[data-theme="light"] {
+  --backgroundColour: white;
+  --btnBackgroundColour: black;
+  --textColour: black;
+  --btnTextColour: white;
+  --placeholderTextColour: #322f2f;
+  --hoverColour: darkblue;
+  --postHover: #d7d7dc;
+  --deleteBtnBack: red;
+  --deleteBtnText: white;
+  --deleteBtnBackHover: lightcoral;
+  --deleteBtnTextHover: black;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -17,7 +45,7 @@ code {
 main {
   height: 100%;
   overflow-y: scroll;
-  background-color: black;
+  background-color: var(--backgroundColour);
 }
 
 p {
@@ -29,5 +57,5 @@ p {
   display: grid;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--textColour);
 }

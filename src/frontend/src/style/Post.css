@@ -2,16 +2,16 @@
     display: grid;
     gap: 1rem;
 
-    border: 1px solid #707070;
+    border: 1px solid var(--placeholderTextColour);
     padding-inline: 1.5rem;
     padding-block: 1.5rem 0;
     border-radius: 1.5rem;
     text-decoration: none;
-    color: white;
+    color: var(--textColour);
 }
 
 .post-layout:hover {
-    background-color: #0f0f10;
+    background-color: var(--postHover);
 }
 
 .profile-info {
@@ -29,13 +29,13 @@
 
 .profile-name {
     text-decoration: none;
-    color: white;
+    color: var(--textColour);
     font-size: 1.5rem;
     font-weight: bold;
 }
 
 .profile-name:hover {
-    color: lightblue;
+    color: var(--hoverColour);
 }
 
 .post-content {
@@ -48,7 +48,7 @@
     gap: 2rem;
 
     padding: 0.5rem 1rem;
-    border-top: 1px solid #707070;
+    border-top: 1px solid var(--placeholderTextColour);
 }
 
 .likes,
@@ -66,9 +66,13 @@
 
 .like-btn {
     border: none;
-    background-color: black;
+    background-color: var(--backgroundColour);
     height: 1rem;
     padding: 0;
+}
+
+.post-layout:hover .like-btn {
+    background-color: var(--postHover);
 }
 
 .like-btn:hover {

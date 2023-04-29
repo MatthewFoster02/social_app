@@ -1,6 +1,6 @@
 .wrapperHP {
-    background-color: black;
-    color: white;
+    background-color: var(--backgroundColour);
+    color: var(--textColour);
 }
 
 ::-webkit-scrollbar {
@@ -8,10 +8,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: black;
+    background: var(--backgroundColour);
     border-radius: 50vh;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: black;
+    background: var(--backgroundColour);
 }

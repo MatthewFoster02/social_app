@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import whiteHeart from '../images/like-white.png';
-import redHeartHollow from '../images/like-red-hollow.png';
+import blackHeart from '../images/like-black.png';
+import redHeartHollow from '../images/like-red.png';
 import redHeartFilled from '../images/like-red-filled.png';
-import comment from '../images/comment-white.png';
+import whiteComment from '../images/comment-white.png';
+import blackComment from '../images/comment-black.png';
 import postsAPI from '../apiHandlers/posts.js';
 import '../style/Post.css';
 import useAuth from "../hooks/useAuth.js";
@@ -16,12 +18,44 @@ const Post = ({post}) =>
     const [likeVal, setLikeVal] = useState(likes);
     const [postLiked, setPostLiked] = useState(false);
     const [heartImage, setHeartImage] = useState(whiteHeart);
+    const [commentImage, setCommentImage] = useState(whiteComment);
 
     useEffect(() =>
     {
         if(likers != null)
             if(likers.includes(auth.id)) setPostLiked(true);
     }, [auth.id, likers]);
+
+    useEffect(() =>
+    {
+        const observer = new MutationObserver((mutationsList) =>
+        {
+            for (const mutation of mutationsList)
+            {
+                if (mutation.attributeName === 'data-theme')
+                {
+                    const newTheme = mutation.target.getAttribute('data-theme');
+                    if (newTheme === 'dark')
+                    {
+                        setHeartImage(whiteHeart);
+                        setCommentImage(whiteComment);
+                    }
+                    else
+                    {
+                        setHeartImage(blackHeart);
+                        setCommentImage(blackComment);
+                    }
+                }
+            }
+        })
+
+        observer.observe(document.body, { attributes: true });
+
+        return () =>
+        {
+            observer.disconnect();
+        }
+    }, [heartImage]);
 
     const addLike = (e) =>
     {
@@ -83,7 +117,7 @@ const Post = ({post}) =>
                     </div>
                 }
                 <div className="comments">
-                    <img src={comment} className="comment-img" alt="" />
+                    <img src={commentImage} className="comment-img" alt="" />
                     <p>{
                         comments ? comments.length : 0    
                     }</p>
