@@ -59,3 +59,17 @@ textarea::-webkit-scrollbar-thumb {
 textarea::-webkit-scrollbar-thumb:hover {
     background: var(--placeholderTextColour);
 }
+
+.form-section {
+    display: grid;
+    gap: 1rem;
+}
+
+.assistant {
+    display: flex;
+    justify-content: space-between;
+}
+
+.assistant-txt {
+    color: var(--placeholderTextColour);
+}

@@ -58,11 +58,13 @@ const HomeHeader = () =>
         const formPost = document.getElementById('post-form');
         const formGPT = document.getElementById('gpt-form');
         const switchBtn = document.getElementById('toggle');
+        const formType = document.getElementById('form-type');
 
         formPost.classList.toggle('no-display');
         formGPT.classList.toggle('no-display');
 
         switchBtn.innerHTML === 'Assistant' ? switchBtn.innerHTML = 'Post' : switchBtn.innerHTML = 'Assistant';
+        switchBtn.innerHTML === 'Assistant' ? formType.innerHTML = 'Can\'t word your post correctly? Ask GPT to do it for you!' : formType.innerHTML = 'Want to author your own post? Switch back!';
     }
 
     const askGPT = async (prompt) =>
@@ -82,60 +84,65 @@ const HomeHeader = () =>
             <h2 className="titleLogin">
                 Home
             </h2>
-            <div className="form">
-                <form onSubmit={handleSubmitPost(createPost, onErrors)} id="post-form">
-                    <div className="add-post">
-                        <div className="input">
-                            <textarea
-                                placeholder="What are you going to post?"
-                                className="make-post"
-                                cols="40"
-                                rows="7"
-                                resize="none"
-                                name="post"
-                                id="post"
-                                {...registerPost('post', { required: '*Post content required'})}
-                            >
-                            </textarea>
-                            <span className="err">
-                                {
-                                    errorsPost?.post && errorsPost.post.message
-                                }
-                            </span>
+            <div className="form-section">
+                <div className="form">
+                    <form onSubmit={handleSubmitPost(createPost, onErrors)} id="post-form">
+                        <div className="add-post">
+                            <div className="input">
+                                <textarea
+                                    placeholder="What are you going to post?"
+                                    className="make-post"
+                                    cols="40"
+                                    rows="7"
+                                    resize="none"
+                                    name="post"
+                                    id="post"
+                                    {...registerPost('post', { required: '*Post content required'})}
+                                >
+                                </textarea>
+                                <span className="err">
+                                    {
+                                        errorsPost?.post && errorsPost.post.message
+                                    }
+                                </span>
+                            </div>
+                            <button className="btn-hh">
+                                Post
+                            </button>
                         </div>
-                        <button className="btn-hh">
-                            Post
-                        </button>
-                    </div>
-                </form>
-                <form onSubmit={handleSubmitGPT(askGPT, onErrors)} id="gpt-form" className="no-display">
-                    <div className="add-post">
-                        <div className="input">
-                            <textarea
-                                placeholder="Enter prompt for GPT..."
-                                className="make-post"
-                                cols="40"
-                                rows="7"
-                                resize="none"
-                                name="gpt"
-                                id="gpt"
-                                {...registerGPT('gpt', { required: '*Prompt required'})}
-                            >
-                            </textarea>
-                            <span className="err">
-                                {
-                                    errorsGPT?.gpt && errorsGPT.gpt.message
-                                }
-                            </span>
+                    </form>
+                    <form onSubmit={handleSubmitGPT(askGPT, onErrors)} id="gpt-form" className="no-display">
+                        <div className="add-post">
+                            <div className="input">
+                                <textarea
+                                    placeholder="Enter prompt for GPT..."
+                                    className="make-post"
+                                    cols="40"
+                                    rows="7"
+                                    resize="none"
+                                    name="gpt"
+                                    id="gpt"
+                                    {...registerGPT('gpt', { required: '*Prompt required'})}
+                                >
+                                </textarea>
+                                <span className="err">
+                                    {
+                                        errorsGPT?.gpt && errorsGPT.gpt.message
+                                    }
+                                </span>
+                            </div>
+                            <button className="btn-hh">
+                                Ask
+                            </button>
                         </div>
-                        <button className="btn-hh">
-                            Ask
-                        </button>
-                    </div>
-                </form>
-                <button className="btn-hh" onClick={toggleGPT} id="toggle">
-                    Assistant
-                </button>
+                    </form>
+                </div>
+                <div className="assistant">
+                    <div className="assistant-txt" id='form-type'>Can't word your post correctly? Ask GPT to do it for you!</div>
+                    <button className="btn-hh" onClick={toggleGPT} id="toggle">
+                        Assistant
+                    </button>
+                </div>
             </div>
             {
                 apiError && (
