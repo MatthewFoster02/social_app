@@ -78,3 +78,13 @@
 .like-btn:hover {
     cursor: pointer;
 }
+
+@media (max-width: 800px) {
+    .post-content {
+        font-size: 0.875rem;
+    }
+
+    .post-layout {
+        padding-inline: 1rem;
+    }
+}

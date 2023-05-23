@@ -40,3 +40,9 @@
     cursor: pointer;
     background-color: var(--hoverColour);
 }
+
+@media (max-width: 800px) {
+    .wrapperDP {
+        padding-inline: 1.25rem;
+    }
+}
