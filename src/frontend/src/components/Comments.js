@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import {MoonLoader} from 'react-spinners';
 
 import '../style/Comments.css';
 import postsAPI from '../apiHandlers/posts.js';
@@ -16,7 +17,7 @@ const Comments = ({id}) =>
         async function fetchComments()
         {
             const commentsData = await postsAPI.getComments(id.id);
-            if(commentsData['statusText'] === 'OK')
+            if(commentsData['status'] === 200)
             {
                 const commentsList = await commentsData['data'];
                 if(commentsList.length === 0)
@@ -54,8 +55,8 @@ const Comments = ({id}) =>
     return (
         <div className="wrapperC">
             {
-                isPending && <div>
-                    <h2>Loading Comments...</h2>
+                isPending && <div className="loader">
+                    <MoonLoader color="#FFF" />
                 </div>
             }
             {

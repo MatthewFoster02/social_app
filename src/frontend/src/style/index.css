@@ -59,3 +59,9 @@ p {
   justify-content: center;
   color: var(--textColour);
 }
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

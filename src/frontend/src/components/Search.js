@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import {MoonLoader} from 'react-spinners';
 
 import users from "../apiHandlers/users.js";
 import '../style/Search.css';
@@ -21,7 +22,7 @@ const Search = () =>
         setIsPending(true);
         setProfiles([]);
         const query_res = await users.getUsers(query.search);
-        if(query_res['statusText'] === 'OK')
+        if(query_res['status'] === 200)
         {
             const profileData = await query_res['data'];
             setProfiles(profileData.slice(0, 3));
@@ -79,9 +80,7 @@ const Search = () =>
             }
             <div className="search-results">
                 {
-                    isPending && <div>
-                        <h2>Loading Profiles...</h2>
-                    </div>
+                    isPending && <MoonLoader color="#FFF" size={30} />
                 }
                 {
                     profiles && profiles.map((el) =>

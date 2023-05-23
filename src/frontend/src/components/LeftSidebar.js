@@ -90,6 +90,7 @@ const LeftSidebar = () =>
                 <label class="toggle-switch">
                     <input type="checkbox" onChange={toggleTheme} />
                     <span class="slider"></span>
+                    <div className="mode">Light Mode</div>
                 </label>
             </div>
             {

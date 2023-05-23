@@ -38,7 +38,7 @@ const UpdateProfile = () =>
         formData.append('birthday', birthday);
         
         const updated_user = await usersAPI.update(auth.id, formData, auth.token);
-        if(updated_user['statusText'] === 'OK')
+        if(updated_user['status'] === 200)
         {
             const userDetails = await updated_user['data'];
             let userAuth = {

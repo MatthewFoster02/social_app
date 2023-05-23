@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import {MoonLoader} from 'react-spinners';
 
 import postsAPI from '../apiHandlers/posts.js';
 import Post from "./Post.js";
@@ -24,7 +25,7 @@ const DisplayPosts = ({props}) =>
             {
                 res_posts = await postsAPI.getPostsByQuery(props, page);
             }
-            if(res_posts['statusText'] === 'OK')
+            if(res_posts['status'] === 200)
             {
                 const posts = await res_posts['data'];
                 setPosts(posts.posts.reverse());
@@ -52,8 +53,8 @@ const DisplayPosts = ({props}) =>
     return (
         <div className="wrapperDP">
             {
-                isPending && <div>
-                    <h2>Loading Posts...</h2>
+                isPending && <div className="loader">
+                    <MoonLoader color="#FFF" />
                 </div>
             }
             {

@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import {MoonLoader} from 'react-spinners';
 
 import usersAPI from "../apiHandlers/users.js";
 import useAuth from "../hooks/useAuth.js";
@@ -21,7 +22,7 @@ const Profile = () =>
         {
             const userInfo = await usersAPI.getUser(id);
 
-            if(userInfo['statusText'] === 'OK')
+            if(userInfo['status'] === 200)
             {
                 const userData = await userInfo['data'];
                 setUser(userData);
@@ -58,9 +59,10 @@ const Profile = () =>
         <div className="contain">
             <div className="wrapper-profile">
                 {
-                    isPending && <div>
-                        <h2>Loading Profile...</h2>
+                    isPending && <div className="loader">
+                        <MoonLoader color="#FFF" />
                     </div>
+
                 }
                 <h2 className="titleLogin">
                     {user.username}

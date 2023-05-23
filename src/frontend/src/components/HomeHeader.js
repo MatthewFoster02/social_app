@@ -37,7 +37,7 @@ const HomeHeader = () =>
                 'author_username': auth.username,
                 'comment': false
             }, auth.token);
-        if(post_res['statusText'] === 'Created')
+        if(post_res['status'] === 201)
         {
             const postData = await post_res['data'];
             navigate(`/post/${postData._id}`, { replace: true });

@@ -20,7 +20,7 @@ const Login = () =>
     const onFormSubmit = async (data) =>
     {
         const res = await usersAPI.login(data);
-        if(res['statusText'] === 'OK')
+        if(res['status'] === 200)
         {
             const userDetails = await res['data'];
             let userAuth = {

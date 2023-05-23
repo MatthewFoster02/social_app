@@ -71,6 +71,19 @@
     aspect-ratio: 1;
 }
 
+.mode {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--textColour);
+    line-height: 1;
+}
+
+.toggle-switch {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
 /* Hide the checkbox */
 .toggle-switch input {
     display: none;
@@ -82,7 +95,7 @@
     display: inline-block;
     width: 4rem;
     height: 2rem;
-    background-color: var(--placeholderTextColour);
+    background-color: var(--textColour);
     border-radius: 100vw;
     transition: background-color 0.2s;
   }
@@ -93,7 +106,7 @@
   
   /* Style the slider when the checkbox is checked */
   .toggle-switch input:checked + .slider {
-    background-color: var(--hoverColour);
+    background-color: var(--textColour);
   }
   
   /* Style the circle inside the slider */

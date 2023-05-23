@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import {MoonLoader} from 'react-spinners';
 
 import whiteHeart from '../images/like-white.png';
 import blackHeart from '../images/like-black.png';
@@ -30,7 +31,7 @@ const ShowPost = () =>
         async function fetchPost()
         {
             const post_res = await postsAPI.getPostByID(id);
-            if(post_res['statusText'] === 'OK')
+            if(post_res['status'] === 200)
             {
                 const postData = await post_res['data'];
                 const dateMillisecs = postData.date_posted;
@@ -66,7 +67,7 @@ const ShowPost = () =>
     const deletePost = async () =>
     {
         const deleted_result = await postsAPI.delete(id, auth.token, post.comment);
-        if(deleted_result['statusText'] === 'No Content')
+        if(deleted_result['status'] === 204)
         {
             setPost(null);
             alert('Post successfully deleted.');
@@ -167,8 +168,8 @@ const ShowPost = () =>
     return (
         <div className='wrapperSP'>
             {
-                isPending && <div>
-                    <h2>Loading Profile...</h2>
+                isPending && <div className="loader">
+                    <MoonLoader color="#FFF" />
                 </div>
             }
             <h2 className="postUsername">
