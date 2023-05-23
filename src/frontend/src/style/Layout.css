@@ -5,3 +5,9 @@
     grid-template-columns: 2fr 3fr 2fr;
     position: fixed;
 }
+
+@media (max-width: 800px) {
+    .wrapperLayout {
+        grid-template-columns: 1fr;
+    }
+}

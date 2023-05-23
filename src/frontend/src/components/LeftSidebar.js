@@ -8,6 +8,7 @@ import whiteHomeImg from '../images/home-white.png';
 import whiteProfileImg from '../images/account-white.png';
 import blackHomeImg from '../images/home-black.png';
 import blackProfileImg from '../images/account-black.png';
+import Switch from "./ThemeSwitch.js";
 
 
 const LeftSidebar = () => 
@@ -55,22 +56,6 @@ const LeftSidebar = () =>
         navigate('/login', {replace: true});
     }
 
-    const setLightTheme = () =>
-    {
-        document.querySelector("body").setAttribute("data-theme", "light");
-    }
-
-    const setDarkTheme = () =>
-    {
-        document.querySelector("body").setAttribute("data-theme", "dark");
-    }
-
-    const toggleTheme = (e) =>
-    {
-        if(e.target.checked) setLightTheme();
-        else setDarkTheme();
-    }
-
     return (
         <div className="wrapper">
             <div className="links">
@@ -87,11 +72,7 @@ const LeftSidebar = () =>
                         Profile
                     </Link>
                 }
-                <label class="toggle-switch">
-                    <input type="checkbox" onChange={toggleTheme} />
-                    <span class="slider"></span>
-                    <div className="mode">Light Mode</div>
-                </label>
+                <Switch />
             </div>
             {
                 !auth?.username ? (

@@ -59,6 +59,7 @@
     font-weight: bold;
     padding-block: 0.5rem;
     border-radius: 100vw;
+    text-align: center;
 }
 
 .btn-log:hover {
@@ -127,3 +128,8 @@
     transform: translateX(2rem);
   }
   
+@media (max-width: 800px) {
+    .wrapper {
+        display: none;
+    }
+}

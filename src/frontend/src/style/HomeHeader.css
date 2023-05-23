@@ -68,8 +68,27 @@ textarea::-webkit-scrollbar-thumb:hover {
 .assistant {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .assistant-txt {
     color: var(--placeholderTextColour);
+}
+
+@media (max-width: 800px) {
+    .wrapperHH {
+        padding-inline: 1rem;
+    }
+    .btn-hh {
+        font-size: 0.65rem;
+    }
+
+    .assistant-txt {
+        font-size: 0.615rem;
+        font-weight: bold;
+    }
+
+    .make-post {
+        font-size: 1rem;
+    }
 }

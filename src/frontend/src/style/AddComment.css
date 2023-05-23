@@ -4,8 +4,8 @@
 
 .comment-submit {
     border: none;
-    background-color: var(--backgroundColour);
-    color: var(--textColour);
+    background-color: var(--textColour);
+    color: var(--backgroundColour);
     font-weight: bold;
     font-size: 1.25rem;
     padding: 0.5rem 1rem;
