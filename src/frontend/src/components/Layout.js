@@ -10,7 +10,6 @@ const Layout = ({children}) =>
     return (
         <div className="wrapperLayout">
             <LeftSidebar />
-            <HeaderNav />
             <main>
                 <Outlet />
                 <div>{children}</div>
