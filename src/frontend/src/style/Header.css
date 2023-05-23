@@ -1,0 +1,23 @@
+.headerMobile {
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--backgroundColour);
+    color: var(--textColour);
+}
+
+.link-header {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.link-header:hover {
+    color: var(--hoverColour);
+}
+
+@media (min-width: 801px) {
+    .headerMobile {
+        display: none;
+    }
+}

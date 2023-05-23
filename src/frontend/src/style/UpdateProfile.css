@@ -10,3 +10,21 @@
 .birthday-inputs > input {
     max-width: 6rem;
 }
+
+@media (max-width: 800px) {
+    .wrapperLogin {
+        min-width: 100vw;
+    }
+    
+    .birthday-inputs {
+        gap: 0.5rem;
+    }
+
+    .birthday-inputs > input {
+        width: 4rem;
+    }
+
+    .input-style {
+        font-size: 1rem;
+    }
+}

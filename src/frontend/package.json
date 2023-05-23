@@ -4,6 +4,9 @@
   "type": "module",
   "private": true,
   "dependencies": {
+    "@emotion/styled": "^11.11.0",
+    "@mui/base": "^5.0.0-beta.2",
+    "@mui/system": "^5.13.2",
     "@radix-ui/react-switch": "^1.0.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -17,6 +20,7 @@
     "react-app-rewired": "^2.2.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
+    "react-icons": "^4.8.0",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
     "react-spinners": "^0.13.8",
