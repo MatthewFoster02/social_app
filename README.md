@@ -7,7 +7,7 @@ The backend is coded in python using the FastAPI library. [This](https://github.
 
 ### MAJOR FEATURE (GPT ASSISTANCE): When a user wants to create a post they can ask the assistant to create a post for them. The assistant simply takes the input and sends it to the OpenAI API endpoint for Chat Completion.
 
-The other main features are registering for an account, logging in/out, creating a post, commenting on a post, liking a post, deleting a post, viewing and individual post and all its comments, searching for a user's profile, viewing profiles (including your own), and updating your profile.
+The other main features are registering for an account, logging in/out, creating a post, commenting on a post, liking a post, deleting a post, viewing an individual post and all its comments, searching for a user's profile, viewing profiles (including your own), and updating your profile.
 
 This application is using the FARM stack. FastApi, React, MongoDB!
 
