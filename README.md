@@ -1,6 +1,6 @@
 # Social Media Application (Shallow Clone)
 
-## [WEBSITE](https://social-media-application-clone.netlify.app/) *(Backend hosted on Render, currently not loading info from database to frontend correctly)*
+## [WEBSITE](https://social-media-application-clone.netlify.app/) *(Backend hosted on [Render](https://render.com/))*
 This GitHub repository contains the plans and code for a social media clone. The frontend style resembles Twitter, you can find the Adobe Xd design files [here](https://github.com/MatthewFoster02/social_app/blob/main/planning/frontend/FRONTEND.md) and a general structure of the frontend react app. 
 
 The backend is coded in python using the FastAPI library. [This](https://github.com/MatthewFoster02/social_app/blob/main/planning/backend/BACKEND.md) document explains the structure and design of the backend.
