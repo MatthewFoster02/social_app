@@ -66,3 +66,13 @@
     background-color: var(--deleteBtnBackHover);
     color: var(--deleteBtnTextHover);
 }
+
+@media (max-width: 800px) {
+    .wrapperSP {
+        min-width: 100vw;
+    }
+    
+    .post-container {
+        padding-inline: 1rem;
+    }
+}

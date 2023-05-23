@@ -8,3 +8,9 @@
     font-weight: bolder;
     text-align: center;
 }
+
+@media (max-width: 800px) {
+    .wrapperC {
+        padding-inline: 1.125rem;
+    }
+}

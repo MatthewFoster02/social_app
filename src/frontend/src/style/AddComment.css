@@ -16,3 +16,17 @@
     cursor: pointer;
     background-color: var(--hoverColour);
 }
+
+@media (max-width: 800px) {
+    .wrapperAC {
+        padding-inline: 1rem;
+    }
+
+    .comment-submit {
+        font-size: 0.875rem;
+    }
+
+    .searchbar > input {
+        font-size: 1rem;
+    }
+}
